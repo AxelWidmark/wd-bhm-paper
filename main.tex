@@ -1,0 +1,333 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.0 released 14 May 2015
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+% Only include extra packages if you really need them. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+\usepackage{amssymb}	% Extra maths symbols
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+\newcommand{\aw}[1]{\textcolor{red}{[AW: #1]}}
+
+\newcommand{\popp}{\boldsymbol{\Psi}}
+\newcommand{\objp}{\boldsymbol{\psi}}
+\newcommand{\data}{\mathbf{d}}
+\newcommand{\Teff}{T}
+\newcommand{\logg}{g}
+\newcommand{\pr}{\text{Pr}}
+\newcommand{\de}{\text{d}}
+
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[Inferring properties of the White Dwarf population]{Inferring properties of the White Dwarf population of the Milky Way using astrometry and photometry}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[A. Widmark]{
+Axel Widmark$^1$\thanks{E-mail: axel.widmark@fysik.su.se} 
+\\
+% List of institutions
+$^1$The Oskar Klein Centre for Cosmoparticle Physics, Department of
+Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
+}
+
+% These dates will be filled out by the publisher
+\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Enter the current year, for the copyright statements etc.
+\pubyear{2018}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+\begin{abstract}
+We develop a method of inferring properties of the White Dwarf population in the solar neighbourhood.
+\end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+keyword1 -- keyword2 -- keyword3
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+
+White dwarfs are really interesting. Gaia will discover many more than are previously know and will provide precise parallax measurements. This distance constraint will enable much stronger and more robust inference on the properties of white dwarfs.
+
+In the this article we present a method of how infer the distribution of temperature and surface gravity of a population of white dwarfs. We apply this method to mock data with photometric data in \emph{ugriz} color bands and demonstrate the impact of parallax measurements.
+
+
+\section{Method}\label{sec:method}
+
+The full posterior on both population parameters and object parameters is written
+
+\begin{equation}
+	\pr(\popp,\objp | \data ) = \pr(\popp)
+    \prod_i \frac{S(\data_i) \pr(\data_i|\objp_i) \pr(\objp_i | \popp)}{\bar{N}(S,\popp)},
+\end{equation}
+where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the probability of being selected given the data of that object; $\pr(\data_i|\objp_i)$ is the likelihood of the data of an object given its object parameters; $\pr(\objp_i | \popp)$ is the probability of object parameters given the population parameters; finally, $\bar{N}(S,\popp)$ is the normalization to $\pr(\objp_i | \popp)$, and depends on the selection function and the population parameters.
+
+
+
+\begin{table}
+	\centering
+	\caption{The 4 population parameters of our model, the 3 object parameters, and the data of the respective stars.}
+	\label{tab:parameters}
+    \begin{tabular}{l}
+		\hline
+		Population parameters, $\popp$ \\
+		\hline
+		$\alpha$,\quad $\bar{g}$,\quad $\sigma_g$,\quad $\gamma_g$ \\
+        \hline
+        Object parameters, $\objp_{i=1,...,n}$ \\
+        \hline
+        $\Teff$,\quad $\logg$,\quad $\Delta$ \\
+        \hline
+        Data, $\data_{i=1,...,n}$ \\
+        \hline
+        $\hat{\varpi}$,\quad $\sigma_{\hat{\varpi}}$,\quad $\hat{m}_{c=\{u,g,r,i,z\}}$,\quad $\sigma_{\hat{m}_c}$,\quad $l$,\quad $b$ \\
+		\hline
+	\end{tabular}
+\end{table}
+
+\subsection{Population model}\label{sec:populationmodel}
+
+We list the population parameters of our model, encapsulated in a vector $\popp$, in table \ref{tab:parameters}, along with the object parameters and data. The population parameters are $\alpha$, which parameterizing the distribution of temperatures, and $\bar{g}$, $\sigma_g$, $\gamma_g$ which parameterize the distribution of surface gravities.
+
+The distribution of surface gravity and effective temperature are parameterized by
+
+\begin{equation}
+\begin{split}
+	\pr(\logg | \popp) & = t(\logg|\bar{g},\sigma_g,\gamma_g),\\
+    \pr(\Teff | \popp) & = \exp (-\alpha \Teff),
+\end{split}
+\end{equation}
+where $t(\logg)$ is the Student's t-distribution, with variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$. In this sense the quantity $\gamma_g$ parameterizes the heaviness of the tails of the t-distribution. The surface gravity $\logg$ is limited to the interval $(7,9.5)$. The temperature is limited to the interval $(1500,20000)$ K. In effect, this lower limit of 1500 K is not seen due to selection effects.
+
+Also included in our model is a white dwarf number density function $n(\mathbf{x})$. \aw{Same as in Mortlock paper, presumably.}
+
+\aw{Population parameter prior should probably be written here}
+
+
+\subsection{Data and likelihood}\label{sec:data}
+
+The data of each respective white dwarf is listed in table \ref{tab:parameters}. A hatted quantity refers to an observed value of some measurement error, while a non-hatted quantity refers to an observable's true value. The data of a white dwarf consists of parallax measurement $\hat{\varpi}$ and error $\sigma_{\hat{\varpi}}$, apparent magnitude in five bands $\hat{m}_{c=\{u,g,r,i,z\}}$ with their respective errors $\sigma_{\hat{m}_c}$, and finally the angular position on the sky $\{l,b\}$. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected.
+
+The likelihood of an $i$th object is
+
+\begin{equation}
+	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{c} \mathcal{N}(m_c(\objp_i)|\hat{m}_c,\sigma_{\hat{m}_c}),
+\end{equation}
+where the color bands iterated over in the product are $c = \{u,g,r,i,z\}$, and $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$. The factor containing parallax information is dropped when no parallax information is present.
+
+The magnitudes $m_c(\objp_i)$ are functions of the object parameters. Absolute magnitudes $M_c$ in the \emph{ugriz} color bands come from the atmospheric models of Bergeron, as functions of effective temperature $\Teff$ and surface gravity $\logg$.
+
+
+\subsection{Object parameters}\label{sec:objectparams}
+
+Each white dwarf has a set of object parameters encapsulated in $\objp_i$, as listed in table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, and $\Delta$ which parameterizes the distance.
+
+Conceptually, the most straight parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
+
+\begin{equation}
+	\tilde{d} = 
+    h^{-1}\left( \frac{\sum_c \sigma_{\hat{m}_c}^{-2} (\hat{m}_c-M_c(\Teff,\logg))}{\sum_c \sigma_{\hat{m}_c}^{-2}} \right),
+\end{equation}
+where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, which is the difference between apparent to absolute magnitude. The distance parameterized by the object parameters is then $d=\Delta\tilde{d}(\Teff,\logg)$. It is crucial to account for the Jacobian factor that arises with this parameterization, which is $\de \Teff\, \de \logg\, \de d = \de \Teff\, \de \logg\, \de \Delta\, \tilde{d}(\Teff,\logg)$.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{banana.pdf}
+    \caption{A posterior density of an object with true parameters $\Teff=20000$ K, $\logg=8$, and $d=50$ pc, with photometric errors of $\sigma_{\hat{m}_c}=0.03$ in all \emph{ugriz} color bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=8$, $\sigma_g=0.1$, and $\gamma_g=1.2$. Because the photometric errors are somewhat large, the constraint to the surface gravity is mostly due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parameterization. This illustrates the degeneracy between surface gravity $\logg$ and distance $d$, which can be problematic for a Metropolis-Hastings algorithm to sample.}
+    \label{fig:banana}
+\end{figure}
+
+
+
+\subsection{Object posterior}\label{sec:objectposterior}
+
+The posterior on a specific object also includes the term $\pr(\objp_i | \popp)$, normalized by the quantity $\bar{N}(S,\popp)$. It is given by the population, parameterized by the population parameters $\popp$.
+
+\begin{equation}
+\begin{split}
+	& \pr(\objp_i | \popp) \de \Teff \de \logg \de d  \\ & \propto
+    d^2 n(l,b,\varpi) \pr(\Teff | \popp) \pr(g | \popp) \de \Teff \de \logg \de d \\
+    & = \Delta^2\tilde{d}^3(\Teff,\logg) n(l,b,\varpi) \pr(\Teff | \popp) \pr(g | \popp) \de \Teff \de \logg \de \Delta,
+\end{split}
+\end{equation}
+where $n$ is the number density of white dwarfs as a function of spatial position (possible here to also include velocity, but will leave that for now). It is implicit in this expression that the true parallax $\varpi$ is a function of the object parameters $\objp_i$.
+
+The normalization factor is given by
+
+\begin{equation}
+	\bar{N}(S,\popp) = \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
+    \pr(\Teff | \popp) \pr(\logg | \popp) \pr(\mathbf{x} | \popp) S(\Teff,\logg,\mathbf{x}),
+\end{equation}
+basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection factor is equal to
+
+\begin{equation}
+	S(\Teff,\logg,\mathbf{x}) =
+    \int_{\text{min}(\hat{u}_g)}^{\text{max}(\hat{u}_g)} \de \hat{m}_g \mathcal{N}\big( \hat{m}_g | m_g(\Teff,\logg,\mathbf{x}),\sigma_{\hat{m}_g}(m_g(\Teff,\logg,\mathbf{x})) \big),
+\end{equation}
+which is the probability that a hypothetical object with the given parameters is observed to have an apparent $g$-band magnitude in the allowed range. Because the error $\sigma_{\hat{m}_g}$ varies with magnitude (typically larger error for a dimmer object), this quantity is a function the true apparent magnitude.
+
+\aw{There is a question here about what selection cuts we really want to make; in the text it's currently a cut on $\hat{m}_g$. Also, the question about cuts on temperature is really more delicate than its made out to be right now (although practically it's a very minor issue, with miniscule bearing on the end result).}
+
+
+\section{Mock data and inference}\label{sec:mock}
+
+To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, and $\gamma_g=1.2$, and the white dwarf number density $n(\mathbf{x})$ as described in section \ref{sec:populationmodel}. We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from Gaia DR2.
+
+\subsection{Generating a mock data catalogue}
+
+The errors in photometric magnitude vary with apparent magnitude. In order to account for this effect and have realistic errors for our mock data set, we set the errors of our object to the median errors of SDSS DR9, in bins of observed apparent magnitude of width 0.5 mag. This is visible in figure \ref{fig:magnitude_error}.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{median_app_errors.pdf}
+    \caption{The median magnitude errors in SDSS DR9, as a function of observed apparent magnitude.}
+    \label{fig:magnitude_error}
+\end{figure}
+
+Gaia DR2 will have a limiting magnitude of $G=21$, with parallax uncertainties smaller than $0.04$ mas for sources with $G<15$, about $0.1$ mas for sources with $G=17$, and about $0.7$ mas at $G=20$.\footnote{https://www.cosmos.esa.int/web/gaia/dr2} In order to account for this magnitude dependence, we interpolate these points according to figure \ref{fig:parallax_error}.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{parallax_error.pdf}
+    \caption{Parallax error as a function of $G$ magnitude. The dots correspond to magnitudes $G=15,17,20$. For $G\leq 15$ the parallax error is 0.04 mas and constant.}
+    \label{fig:parallax_error}
+\end{figure}
+
+REJECTION SAMPLING BLABLABLA
+
+
+\subsection{Results}
+
+RUN CHAIN WITH BURN-IN AND YADA YADA
+
+The inferred posterior distributions are visible in figures \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information.
+
+\begin{figure*}
+	\includegraphics[width=.8\textwidth]{toy_chain_40-40.pdf}
+    \caption{Posterior density of the population parameters, for a mock data set with no astrometric information.}
+    \label{fig:chain}
+\end{figure*}
+
+\begin{figure*}
+	\includegraphics[width=.8\textwidth]{toy_chain_include-parallax_40-40.pdf}
+    \caption{Posterior density of the population parameters, for a mock data set with parallax information.}
+    \label{fig:chain_parallax}
+\end{figure*}
+
+
+
+
+\section{Disk and halo populations}
+
+
+
+\section{Binary population}
+
+
+
+\section{Conclusions}
+
+
+
+\section*{Acknowledgements}
+
+The Acknowledgements section is not numbered. Here you can thank helpful
+colleagues, acknowledge funding agencies, telescopes and facilities used etc.
+Try to keep it short.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+%\bibliographystyle{mnras}
+%\bibliography{example} % if your bibtex file is called example.bib
+
+
+% Alternatively you could enter them by hand, like this:
+% This method is tedious and prone to error if you have lots of references
+\begin{thebibliography}{99}
+\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
+Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
+\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
+Others S., 2012, Journal of Interesting Stuff, 17, 198
+\end{thebibliography}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% APPENDICES %%%%%%%%%%%%%%%%%%%%%
+
+\appendix
+
+\section{Some extra material}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
