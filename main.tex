@@ -159,7 +159,7 @@ The distribution of surface gravity and effective temperature are parameterized 
     \pr(\Teff | \popp) & = \exp (-\alpha \Teff),
 \end{split}
 \end{equation}
-where $t(\logg)$ is the Student's t-distribution, with variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$. In this sense the quantity $\gamma_g$ parameterizes the heaviness of the tails of the t-distribution. The surface gravity $\logg$ is limited to the interval $(7,9.5)$. The temperature is limited to the interval $(1500,20000)$ K. In effect, this lower limit of 1500 K is not seen due to selection effects.
+where $t(\logg)$ is the Student's t-distribution, with variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$. In this sense the quantity $\gamma_g$ parameterizes the heaviness of the tails of the t-distribution. The surface gravity $\logg$ is limited to the interval $(7,9.5)$. The temperature is limited to the interval $(1500,20000)$ K. In effect, this lower limit of 1500 K is not seen due to selection effects. \aw{Now the model follows the power law ($\alpha=3.5$) all the way down to 1500 K. I think it would make sense to have some cutoff at higher temperature, right? At like 4000 K or something? I'm not sure what is realistic here. Also, it would mean some things for the inference, which we can discuss.}
 
 Also included in our model is a white dwarf number density function $n(\mathbf{x})$. \aw{Same as in Mortlock paper, presumably.}
 
@@ -184,7 +184,7 @@ The magnitudes $m_c(\objp_i)$ are functions of the object parameters. Absolute m
 
 Each white dwarf has a set of object parameters encapsulated in $\objp_i$, as listed in table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, and $\Delta$ which parameterizes the distance.
 
-Conceptually, the most straight parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
+Conceptually, the most straight forward parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
 
 \begin{equation}
 	\tilde{d} = 
@@ -219,24 +219,32 @@ The normalization factor is given by
 	\bar{N}(S,\popp) = \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
     \pr(\Teff | \popp) \pr(\logg | \popp) \pr(\mathbf{x} | \popp) S(\Teff,\logg,\mathbf{x}),
 \end{equation}
-basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection factor is equal to
+basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection criteria of our sample is for all objects to have a Gaia $G$ band apparent magnitude brighter than 18. The selection factor is equal to
 
 \begin{equation}
 	S(\Teff,\logg,\mathbf{x}) =
-    \int_{\text{min}(\hat{u}_g)}^{\text{max}(\hat{u}_g)} \de \hat{m}_g \mathcal{N}\big( \hat{m}_g | m_g(\Teff,\logg,\mathbf{x}),\sigma_{\hat{m}_g}(m_g(\Teff,\logg,\mathbf{x})) \big),
+    \int_{\text{min}(\hat{m}_G)}^{\text{max}(\hat{m}_G)} \de \hat{m}_G \mathcal{N}\big( \hat{m}_G | m_G(\Teff,\logg,\mathbf{x}),\sigma_{\hat{m}_G}(m_G(\Teff,\logg,\mathbf{x})) \big),
 \end{equation}
-which is the probability that a hypothetical object with the given parameters is observed to have an apparent $g$-band magnitude in the allowed range. Because the error $\sigma_{\hat{m}_g}$ varies with magnitude (typically larger error for a dimmer object), this quantity is a function the true apparent magnitude.
+which is the probability that a hypothetical object with the given parameters is observed to have an apparent Gaia $G$ band magnitude in the allowed range. Because the error $\sigma_{\hat{m}_g}$ varies with magnitude (typically larger error for a dimmer object), this quantity is in principle a function the true apparent magnitude. However, because the errors on the $G$ band magnitude are small we will neglect them, and the selection factor is just a Heaviside function, like
 
-\aw{There is a question here about what selection cuts we really want to make; in the text it's currently a cut on $\hat{m}_g$. Also, the question about cuts on temperature is really more delicate than its made out to be right now (although practically it's a very minor issue, with miniscule bearing on the end result).}
+\begin{equation}
+	S(\Teff,\logg,\mathbf{x}) =
+    \Theta \big( 18-m_G(\Teff,\logg,\mathbf{x}) \big).
+\end{equation}
+When working with actual data, it is of course essential to investigate the viability of such an assumption.
+
+
+
 
 
 \section{Mock data and inference}\label{sec:mock}
 
 To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, and $\gamma_g=1.2$, and the white dwarf number density $n(\mathbf{x})$ as described in section \ref{sec:populationmodel}. We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from Gaia DR2.
 
+
 \subsection{Generating a mock data catalogue}
 
-The errors in photometric magnitude vary with apparent magnitude. In order to account for this effect and have realistic errors for our mock data set, we set the errors of our object to the median errors of SDSS DR9, in bins of observed apparent magnitude of width 0.5 mag. This is visible in figure \ref{fig:magnitude_error}.
+The errors in photometric magnitude vary with apparent magnitude. In order to account for this effect and have realistic errors for our mock data set, we set the errors of our object to the median errors of SDSS DR9, in bins of observed apparent magnitude of width 0.5 mag. This is visible in figure \ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude error to 0.01, in order to account for possible systematic errors.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{median_app_errors.pdf}
@@ -276,11 +284,19 @@ The inferred posterior distributions are visible in figures \ref{fig:chain} and 
 
 
 
-\section{Disk and halo populations}
+\section{White dwarf subpopulations}
 
+The actual population of white dwarfs in the Milky Way is of course much richer and complicated than the model described above. We only have white dwarfs of the hydrogen rich type (DA), while in reality there is something like 10 \% helium rich (DB) white dwarfs. Furthermore, younger white dwarfs are more abundant within the disk, while older white dwarfs have had more time to migrate into the halo.
 
+\subsection{DA and DB populations}
 
-\section{Binary population}
+\subsection{Binary population}
+
+Holy grail.
+
+\subsection{Disk and halo populations}
+
+It would be interesting to see qualitative differences between disk and halo white dwarfs. Do they have the same distribution of masses, same fraction of DA and DB stars, the same fraction of binary systems?
 
 
 
@@ -302,16 +318,6 @@ Try to keep it short.
 
 \bibliographystyle{mnras}
 \bibliography{refs} % if your bibtex file is called example.bib
-
-
-% Alternatively you could enter them by hand, like this:
-% This method is tedious and prone to error if you have lots of references
-%\begin{thebibliography}{99}
-%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
-%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
-%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
-%Others S., 2012, Journal of Interesting Stuff, 17, 198
-%\end{thebibliography}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
