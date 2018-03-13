@@ -107,11 +107,23 @@ keyword1 -- keyword2 -- keyword3
 
 %%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
 
+
+
+
+
+
+
 \section{Introduction}
 
 White dwarfs are really interesting. Gaia will discover many more than are previously know and will provide precise parallax measurements. This distance constraint will enable much stronger and more robust inference on the properties of white dwarfs. Here is a reference: \cite{Mortlock:2008gf}.
 
 In the this article we present a method of how infer the distribution of temperature and surface gravity of a population of white dwarfs. We apply this method to mock data with photometric data in \emph{ugriz} color bands and demonstrate the impact of parallax measurements.
+
+
+
+
+
+
 
 
 \section{Method}\label{sec:method}
@@ -166,9 +178,14 @@ Also included in our model is a white dwarf number density function $n(\mathbf{x
 \aw{Population parameter prior should probably be written here}
 
 
+
+
+
+
+
 \subsection{Data and likelihood}\label{sec:data}
 
-The data of each respective white dwarf is listed in table \ref{tab:parameters}. A hatted quantity refers to an observed value of some measurement error, while a non-hatted quantity refers to an observable's true value. The data of a white dwarf consists of parallax measurement $\hat{\varpi}$ and error $\sigma_{\hat{\varpi}}$, apparent magnitude in five bands $\hat{m}_{c=\{u,g,r,i,z\}}$ with their respective errors $\sigma_{\hat{m}_c}$, and finally the angular position on the sky $\{l,b\}$. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected.
+The data of each respective white dwarf is listed in table \ref{tab:parameters}. A hatted quantity ($\hat{\varpi}$) refers to an observed value of some measurement error, while a non-hatted quantity ($\varpi$) refers to an observable's true value. The data of a white dwarf consists of parallax measurement $\hat{\varpi}$ and error $\sigma_{\hat{\varpi}}$, apparent magnitude in five bands $\hat{m}_{c=\{u,g,r,i,z\}}$ with their respective errors $\sigma_{\hat{m}_c}$, and finally the angular position on the sky $\{l,b\}$. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected.
 
 The likelihood of an $i$th object is
 
@@ -180,11 +197,17 @@ where the color bands iterated over in the product are $c = \{u,g,r,i,z\}$, and 
 The magnitudes $m_c(\objp_i)$ are functions of the object parameters. Absolute magnitudes $M_c$ in the \emph{ugriz} color bands come from the atmospheric models of Bergeron, as functions of effective temperature $\Teff$ and surface gravity $\logg$.
 
 
+
+
+
+
+
+
 \subsection{Object parameters}\label{sec:objectparams}
 
 Each white dwarf has a set of object parameters encapsulated in $\objp_i$, as listed in table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, and $\Delta$ which parameterizes the distance.
 
-Conceptually, the most straight forward parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
+Conceptually, the most straight forward parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. This is illustrated in figure \ref{fig:banana}. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
 
 \begin{equation}
 	\tilde{d} = 
@@ -197,6 +220,10 @@ where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, which is th
     \caption{A posterior density of an object with true parameters $\Teff=20000$ K, $\logg=8$, and $d=50$ pc, with photometric errors of $\sigma_{\hat{m}_c}=0.03$ in all \emph{ugriz} color bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=8$, $\sigma_g=0.1$, and $\gamma_g=1.2$. Because the photometric errors are somewhat large, the constraint to the surface gravity is mostly due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parameterization. This illustrates the degeneracy between surface gravity $\logg$ and distance $d$, which can be problematic for a Metropolis-Hastings algorithm to sample.}
     \label{fig:banana}
 \end{figure}
+
+
+
+
 
 
 
@@ -239,6 +266,8 @@ When working with actual data, it is of course essential to investigate the viab
 
 
 
+
+
 \section{Mock data and inference}\label{sec:mock}
 
 To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, and $\gamma_g=1.2$, and the white dwarf number density $n(\mathbf{x})$ as described in section \ref{sec:populationmodel}. We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from Gaia DR2.
@@ -265,6 +294,13 @@ Gaia DR2 will have a limiting magnitude of $G=21$, with parallax uncertainties s
 REJECTION SAMPLING BLABLABLA
 
 
+
+
+
+
+
+
+
 \subsection{Results}
 
 RUN CHAIN WITH BURN-IN AND YADA YADA
@@ -286,11 +322,21 @@ The inferred posterior distributions are visible in figures \ref{fig:chain} and 
 
 
 
+
+
+
+
+
+
 \section{White dwarf subpopulations}
 
 The actual population of white dwarfs in the Milky Way is of course much richer and complicated than the model described above. We only have white dwarfs of the hydrogen rich type (DA), while in reality there is something like 10 \% helium rich (DB) white dwarfs. Furthermore, younger white dwarfs are more abundant within the disk, while older white dwarfs have had more time to migrate into the halo.
 
 In the case of several distinct populations, the total population is no longer described by a single set of population parameters $\popp$.
+
+
+
+
 
 
 \subsection{DA and DB populations}
@@ -321,9 +367,10 @@ Also the normalization term $\bar{N}$, as seen in equation \eqref{eq:normalizati
 \end{split}
 \end{equation}
 
-\subsection{Binary population}
 
-Holy grail.
+
+
+
 
 \subsection{Disk and halo populations}
 
@@ -346,7 +393,30 @@ where $\pr(N | \bar{N})$ is a Poisson number count likelihood. The total number 
 \end{equation}
 
 
+
+
+
+
+
+\subsection{Binary population}
+
+Holy grail.
+
+
+
+
+
+
+
+
+
+
 \section{Conclusions}
+
+
+
+
+
 
 
 
