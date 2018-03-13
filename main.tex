@@ -118,7 +118,7 @@ In the this article we present a method of how infer the distribution of tempera
 
 The full posterior on both population parameters and object parameters is written
 
-\begin{equation}
+\begin{equation}\label{eq:fullposterior}
 	\pr(\popp,\objp | \data ) = \pr(\popp)
     \prod_i \frac{S(\data_i) \pr(\data_i|\objp_i) \pr(\objp_i | \popp)}{\bar{N}(S,\popp)},
 \end{equation}
@@ -215,21 +215,23 @@ where $n$ is the number density of white dwarfs as a function of spatial positio
 
 The normalization factor is given by
 
-\begin{equation}
+\begin{equation}\label{eq:normalization}
 	\bar{N}(S,\popp) = \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
     \pr(\Teff | \popp) \pr(\logg | \popp) \pr(\mathbf{x} | \popp) S(\Teff,\logg,\mathbf{x}),
 \end{equation}
 basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection criteria of our sample is for all objects to have a Gaia $G$ band apparent magnitude brighter than 18. The selection factor is equal to
 
 \begin{equation}
-	S(\Teff,\logg,\mathbf{x}) =
-    \int_{\text{min}(\hat{m}_G)}^{\text{max}(\hat{m}_G)} \de \hat{m}_G \mathcal{N}\big( \hat{m}_G | m_G(\Teff,\logg,\mathbf{x}),\sigma_{\hat{m}_G}(m_G(\Teff,\logg,\mathbf{x})) \big),
+\begin{split}
+	S(\Teff,\logg,\mathbf{x}) = \\
+    \int_{\text{min}(\hat{m}_G)}^{\text{max}(\hat{m}_G)} \de \hat{m}_G \mathcal{N}\big( \hat{m}_G | m_G(\Teff,\logg,d),\sigma_{\hat{m}_G}(m_G(\Teff,\logg,d)) \big),
+\end{split}
 \end{equation}
 which is the probability that a hypothetical object with the given parameters is observed to have an apparent Gaia $G$ band magnitude in the allowed range. Because the error $\sigma_{\hat{m}_g}$ varies with magnitude (typically larger error for a dimmer object), this quantity is in principle a function the true apparent magnitude. However, because the errors on the $G$ band magnitude are small we will neglect them, and the selection factor is just a Heaviside function, like
 
 \begin{equation}
 	S(\Teff,\logg,\mathbf{x}) =
-    \Theta \big( 18-m_G(\Teff,\logg,\mathbf{x}) \big).
+    \Theta \big( 18-m_G(\Teff,\logg,d) \big).
 \end{equation}
 When working with actual data, it is of course essential to investigate the viability of such an assumption.
 
@@ -288,7 +290,36 @@ The inferred posterior distributions are visible in figures \ref{fig:chain} and 
 
 The actual population of white dwarfs in the Milky Way is of course much richer and complicated than the model described above. We only have white dwarfs of the hydrogen rich type (DA), while in reality there is something like 10 \% helium rich (DB) white dwarfs. Furthermore, younger white dwarfs are more abundant within the disk, while older white dwarfs have had more time to migrate into the halo.
 
+In the case of several distinct populations, the total population is no longer described by a single set of population parameters $\popp$.
+
+
 \subsection{DA and DB populations}
+
+Hydrogen rich and helium rich white dwarfs, known as DA and DB, have different spectra and emission lines. This translates into somewhat different colors for DA and DB, such that they are differentiable from eachother with multiband photometry of sufficient precision. In order to account for both DA and DB populations, one can add the fraction of DB ($f_\text{DB}$) white dwarfs to the population paremeters $\popp$. In such a case we would add a labelling object parameter $X_i = \{\text{DA},\text{DB}\}$ to each object.
+
+In the statistical model, as summarized in equation \eqref{eq:fullposterior}, we would replace the term
+
+\begin{equation}
+\begin{split}
+	& \pr(\data_i | \objp_i) \pr(\objp_i | \popp)
+	\rightarrow \\
+	\Big[
+	(1-f_\text{DB}) & \pr(\data_i | \objp_i,X_i=\text{DA}) \pr(\objp_i | \popp) + \\
+	+ f_\text{DB} & \pr(\data_i | \objp_i,X_i=\text{DB}) \pr(\objp_i | \popp)
+	\Big].
+\end{split}
+\end{equation}
+Also the normalization term $\bar{N}$, as seen in equation \eqref{eq:normalization}, is changed by replacing
+
+\begin{equation}
+\begin{split}
+	& S(\Teff,\logg,\mathbf{x}) \rightarrow \\
+	\Big[
+	 (1-f_\text{DB}) & S(\Teff,\logg,\mathbf{x},X=\text{DA})
+	 + f_\text{DB} S(\Teff,\logg,\mathbf{x},X=\text{DB})
+	 \Big].
+\end{split}
+\end{equation}
 
 \subsection{Binary population}
 
@@ -298,6 +329,21 @@ Holy grail.
 
 It would be interesting to see qualitative differences between disk and halo white dwarfs. Do they have the same distribution of masses, same fraction of DA and DB stars, the same fraction of binary systems?
 
+Each subpopulation would have its own set of population parameters, for example $\popp_\text{disk}$ and $\popp_\text{halo}$ for disk and halo white dwarfs. The spatial white dwarfs number density distributions would be different, so we would have $n_\text{disk}(\mathbf{x})$ and $n_\text{halo}(\mathbf{x})$. It would be necessary here to promote the number density (of some reference point, like at the Sun's position) to a population parameter, like $n_{0,\text{disk}}(\mathbf{x})$ and $n_{0,\text{halo}}(\mathbf{x})$, and include a Poisson total number count factor in the model.
+
+Equation \eqref{eq:fullposterior} would instead read
+
+\begin{equation}\label{eq:posterior_disk_halo}
+\begin{split}
+	\pr(\popp,\objp | \data ) = \\ \pr(\popp) \pr(N | \bar{N}) 
+	\prod_i \frac{S(\data_i) \pr(\data_i | \objp_i) \Big[ \pr(\objp_i | \popp_\text{disk})+\pr(\objp_i | \popp_\text{halo}) \Big]}{\bar{N}(S,\popp_\text{disk},\popp_\text{halo})},
+\end{split}
+\end{equation}
+where $\pr(N | \bar{N})$ is a Poisson number count likelihood. The total number count can be written as a sum of the number counts of the two subpopulations,
+
+\begin{equation}
+	\bar{N}(S,\popp_\text{disk},\popp_\text{halo})=\bar{N}_\text{disk}(S,\popp_\text{disk})+\bar{N}_\text{halo}(S,\popp_\text{halo}).
+\end{equation}
 
 
 \section{Conclusions}
