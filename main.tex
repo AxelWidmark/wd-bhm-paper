@@ -246,22 +246,24 @@ The normalization factor is given by
 	\bar{N}(S,\popp) = \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
     \pr(\Teff | \popp) \pr(\logg | \popp) \pr(\mathbf{x} | \popp) S(\Teff,\logg,\mathbf{x}),
 \end{equation}
-basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection criteria of our sample is for all objects to have a Gaia $G$ band apparent magnitude brighter than 18. The selection factor is equal to
+basically an integral over the possible properties of a hypothetical white dwarf drawn from the population model, times the probability of being selected. The selection criteria of our sample is for all objects to have a Gaia $G$ band apparent magnitude brighter than 18 and for the difference between observed $u$ and $g$ band apparent magnitudes to fulfill that $\hat{\delta}_{ug} \equiv \hat{m}_u-\hat{m}_g > 0.0087728$. The latter criterior corresponds to the difference in true $u$ and $g$ colors for a white dwarf of $\Teff =$ 20,000 K and $\logg = 7.9$. The selection factor is the probability that a hypothetical object with the given parameters has observed magnitudes within the allowed range. It is equal to
 
 \begin{equation}
 \begin{split}
 	S(\Teff,\logg,\mathbf{x}) = \\
-    \int_{\text{min}(\hat{m}_G)}^{\text{max}(\hat{m}_G)} \de \hat{m}_G \mathcal{N}\big( \hat{m}_G | m_G(\Teff,\logg,d),\sigma_{\hat{m}_G}(m_G(\Teff,\logg,d)) \big),
+    \int \de \hat{m}_G \Theta \big( 18-\hat{m}_G \big)\mathcal{N}\big( \hat{m}_G | m_G,\sigma_{\hat{m}_G} \big) \times \\
+    \int \de \hat{\delta}_{ug} \Theta \big( \hat{\delta}_{ug}-0.0087728 \big) \mathcal{N}\big( \hat{\delta}_{ug} | \delta_{ug},\sigma_{\hat{\delta}_{ug}}\big),
 \end{split}
 \end{equation}
-which is the probability that a hypothetical object with the given parameters is observed to have an apparent Gaia $G$ band magnitude in the allowed range. Because the error $\sigma_{\hat{m}_g}$ varies with magnitude (typically larger error for a dimmer object), this quantity is in principle a function the true apparent magnitude. However, because the errors on the $G$ band magnitude are small we will neglect them, and the selection factor is just a Heaviside function, like
+where $\delta_{ug} \equiv m_u-m_g$ is the true difference in color, with an error $\sigma_{\hat{\delta}_{ug}} = \sqrt{\sigma_{\hat{m}_u}^2+\sigma_{\hat{m}_g}^2}$ (here assuming that the errors are not correlated). The the photometric errors are in principle functions of the apparent magnitude (typically larger error for a dimmer object), this quantity is in principle a function of the true apparent magnitude.
 
-\begin{equation}
-	S(\Teff,\logg,\mathbf{x}) =
-    \Theta \big( 18-m_G(\Teff,\logg,d) \big).
-\end{equation}
-When working with actual data, it is of course essential to investigate the viability of such an assumption.
 
+%However, because the errors on the $G$ band magnitude are small we will neglect them, and the selection factor is just a Heaviside function, like
+%\begin{equation}
+%	S(\Teff,\logg,\mathbf{x}) =
+%    \Theta \big( 18-m_G(\Teff,\logg,d) \big).
+%\end{equation}
+%When working with actual data, it is of course essential to investigate the viability of such an assumption.
 
 
 
