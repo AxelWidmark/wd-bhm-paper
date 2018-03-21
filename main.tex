@@ -305,9 +305,9 @@ Given these cuts to observables, the selection function is written
 
 \begin{equation}\label{eq:selection}
 \begin{split}
-	S(\Teff,\logg,\mathbf{x}) = \\
-    \int \de \hat{m}_G \Theta \big( 18-\hat{m}_G \big)\mathcal{N}\big( \hat{m}_G | m_G,\sigma_{\hat{m}_G} \big) \times \\
-    \int \de \hat{\delta}_{ugr} \Theta \big( \hat{\delta}_{ugr}+0.183 \big) \mathcal{N}\big( \hat{\delta}_{ugr} | \delta_{ugr},\sigma_{\hat{\delta}_{ugr}}\big),
+	S(\Teff,\logg,\mathbf{x}) = 
+    	      & \int \de \hat{m}_G \Theta \big( 18-\hat{m}_G \big)\mathcal{N}\big( \hat{m}_G | m_G,\sigma_{\hat{m}_G} \big) \\
+    \times & \int \de \hat{\delta}_{ugr} \Theta \big( \hat{\delta}_{ugr}+0.183 \big) \mathcal{N}\big( \hat{\delta}_{ugr} | \delta_{ugr},\sigma_{\hat{\delta}_{ugr}}\big),
 \end{split}
 \end{equation}
 where the error on $\hat{\delta}_{ugr}$ is given by
@@ -315,7 +315,7 @@ where the error on $\hat{\delta}_{ugr}$ is given by
 \begin{equation}
 	\sigma_{\hat{\delta}_{ugr}} = \sqrt{ 0.27 \sigma_{\hat{m}_u}^2 + 0.23 \sigma_{\hat{m}_g}^2 + 0.5 \sigma_{\hat{m}_r}^2 },
 \end{equation}
-assuming that the $ugr$ errors are uncorrelated.
+assuming that the different color band errors are uncorrelated.
 
 
 \subsection{Generating a mock data catalogue}
