@@ -359,14 +359,14 @@ RUN CHAIN WITH BURN-IN AND YADA YADA
 The inferred posterior distributions are visible in figures \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information.
 
 \begin{figure*}
-	\includegraphics[width=.8\textwidth]{toy_chain_40-40.pdf}
-    \caption{Posterior density of the population parameters, for a mock data set with no astrometric information. \aw{ONLY 300 STEPS ATM, chain is converging...}}
+	\includegraphics[width=.8\textwidth]{toy_chain.pdf}
+    \caption{Posterior density of the population parameters, for a mock data set with no astrometric information. \aw{2200 steps atm, chain is still converging.}}
     \label{fig:chain}
 \end{figure*}
 
 \begin{figure*}
-	\includegraphics[width=.8\textwidth]{toy_chain_include-parallax_40-40.pdf}
-    \caption{Posterior density of the population parameters, for a mock data set with parallax information. \aw{ONLY 300 STEPS ATM, chain is converging...}}
+	\includegraphics[width=.8\textwidth]{toy_chain_include-parallax.pdf}
+    \caption{Posterior density of the population parameters, for a mock data set with parallax information. \aw{2200 steps atm, chain is still converging.}}
     \label{fig:chain_parallax}
 \end{figure*}
 
@@ -392,7 +392,7 @@ In the case of several distinct populations, the total population is no longer d
 
 \subsection{DA and DB populations}
 
-Hydrogen rich and helium rich white dwarfs, known as DA and DB, have different spectra and emission lines. This translates into somewhat different colors for DA and DB, such that they are differentiable from eachother with multiband photometry of sufficient precision. In order to account for both DA and DB populations, one can add the fraction of DB ($f_\text{DB}$) white dwarfs to the population paremeters $\popp$. In such a case we would add a labelling object parameter $X_i = \{\text{DA},\text{DB}\}$ to each object.
+Hydrogen rich and helium rich white dwarfs, known as DA and DB, have different spectra and emission lines. This translates into somewhat different colors for DA and DB, such that they are differentiable from eachother with multiband photometry of sufficient precision. In order to account for both DA and DB populations, one can add the fraction of DB white dwarfs ($f_\text{DB}$) to the population paremeters $\popp$. In such a case we would add a labelling object parameter $X_i = \{\text{DA},\text{DB}\}$ to each object.
 
 In the statistical model, as summarized in equation \eqref{eq:fullposterior}, we would replace the term
 
