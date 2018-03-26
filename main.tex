@@ -95,13 +95,15 @@ Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
 
 % Abstract of the paper
 \begin{abstract}
-We develop a method of inferring properties of the White Dwarf population in the solar neighbourhood.
+The white dwarf population of the solar neighborhood holds information on stellar evolution, star formation history and dynamical history of the Milky Way, and could also constrain SN1A thermonuclear supernovae progenitor models.
+The Gaia mission will provide precise astrometry for an unprecedented number of white dwarfs, for which there is enormous scientific potential. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. In this article we demonstrate how to do this using a mock data set with SDSS \emph{ugriz} photometry and astrometric information expected from future Gaia data releases.
+We do so in the framework of a Bayesian Hierarchical Model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference. We also show that the inference becomes more robust and less sensitive to systematic errors.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
 % Don't make up new ones.
 \begin{keywords}
-keyword1 -- keyword2 -- keyword3
+white dwarfs -- stars: statistics -- astrometry
 \end{keywords}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -116,14 +118,15 @@ keyword1 -- keyword2 -- keyword3
 
 \section{Introduction}
 
-White dwarfs are really interesting. Gaia will discover many more than are previously know and will provide precise parallax measurements. This distance constraint will enable much stronger and more robust inference on the properties of white dwarfs. Here is a reference: \cite{Mortlock:2008gf}.
+White dwarfs are the eventual remnants of all light to intermediate mass stars. Upheld by electron degeneracy pressure and with no internal fusion, they are approximately Earth sized objects that cool over billions of years. A population of white dwarfs carries information about the star formation history and dynamical history of its environment. They also constrain models of stellar evolution and beyond Standard Model particle physics. White dwarfs are known to be SN1A thermonuclear supernovae progenitors, although the explosion mechanism is not known, which is something Milky Way white dwarf statistics could constrain.
 
-In the this article we present a method of how infer the distribution of temperature and surface gravity of a population of white dwarfs. We apply this method to mock data with photometric data in \emph{ugriz} color bands and demonstrate the impact of parallax measurements.
+The Gaia mission, soon to publish its second data release (DR2), is expected to discover an unprecedented number of white dwarfs, probably as many as $\sim$ 200,000 \citep{2014A&A...565A..11C,Jordan:2006jg}. Gaia will also provide astrometric information, which previously has not been available for such dim objects. This will break the degeneracy between distance and size in photometric or spectrographic observations, which otherwise makes white dwarf astrostatistics quite difficult. With the enormous size of this data sample, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the white dwarf population in the solar neighborhood, using SDSS \emph{ugriz} photometry and Gaia astrometry.
 
+We generate a mock data sample of white dwarfs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and Gaia, and sample construction selection effects are taken into account. We retain the parameters of the population model using a Bayesian Hierarchical Model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We also show that small systematic errors in photometry or the assumed spatial number density distribution can give rise to large biases, but that these biases are quenched in the presence of Gaia astrometry.
 
+We also discuss how the expand the statistical model when considering several different white dwarf populations with different properties. There are a number of ways to divide the total white dwarf population into subpopulation; the main ones are the following: (i) White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. (ii) Disk and halo white dwarf populations are expected to have different properties. The halo population is older, and holds information about the Milky Way's distant past. (iii) Although very poorly constrained, a significant fraction of binary white dwarf systems are expected. We show that such a subpopulation can be identified with photometric and astrometric information alone.
 
-
-
+This paper is organized as follows...
 
 
 
@@ -360,13 +363,13 @@ The inferred posterior distributions are visible in figures \ref{fig:chain} and 
 
 \begin{figure*}
 	\includegraphics[width=.8\textwidth]{toy_chain.pdf}
-    \caption{Posterior density of the population parameters, for a mock data set with no astrometric information. \aw{2200 steps atm, chain is still converging.}}
+    \caption{Posterior density of the population parameters, for a mock data set with no astrometric information.}
     \label{fig:chain}
 \end{figure*}
 
 \begin{figure*}
 	\includegraphics[width=.8\textwidth]{toy_chain_include-parallax.pdf}
-    \caption{Posterior density of the population parameters, for a mock data set with parallax information. \aw{2200 steps atm, chain is still converging.}}
+    \caption{Posterior density of the population parameters, for a mock data set with parallax information.}
     \label{fig:chain_parallax}
 \end{figure*}
 
