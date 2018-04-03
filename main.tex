@@ -95,9 +95,9 @@ Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
 
 % Abstract of the paper
 \begin{abstract}
-The white dwarf population of the solar neighborhood holds information on stellar evolution, star formation history and dynamical history of the Milky Way, and could also constrain SN1A thermonuclear supernovae progenitor models.
 The Gaia mission will provide precise astrometry for an unprecedented number of white dwarfs, for which there is enormous scientific potential. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. In this article we demonstrate how to do this using a mock data set with SDSS \emph{ugriz} photometry and astrometric information expected from future Gaia data releases.
 We do so in the framework of a Bayesian Hierarchical Model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference. We also show that the inference becomes more robust and less sensitive to systematic errors.
+This is a powerful method to constrain stellar evolution, Type 1a supernovae progenitor scenarios, as well as the star formation history and dynamical history of the Milky Way.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -118,13 +118,13 @@ white dwarfs -- stars: statistics -- astrometry
 
 \section{Introduction}
 
-White dwarfs are the eventual remnants of all light to intermediate mass stars. Upheld by electron degeneracy pressure and with no internal fusion, they are approximately Earth sized objects that cool over billions of years. A population of white dwarfs carries information about the star formation history and dynamical history of its environment. They also constrain models of stellar evolution and beyond Standard Model particle physics. White dwarfs are known to be SN1A thermonuclear supernovae progenitors, although the explosion mechanism is not known, which is something Milky Way white dwarf statistics could constrain.
+The Sloan Digital Sky Survey (SDSS) catalogues a total number of $\sim 29,000$ spectroscopically confirmed white dwarfs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying white dwarfs is that they have no fixed mass or size, such that their observational properties are largely degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this is sensitive to systematic errors. The Gaia mission, soon to publish its second data release (DR2), is expected to increase the number of known white dwarfs by something like an order of magnitude \citep{2014A&A...565A..11C,Jordan:2006jg}. Gaia will also provide astrometric information for local neighbourhood white dwarfs, which previous astrometric missions were unable to do. Hipparcos had a limiting apparent magnitude of $V \sim 12.4$, while Gaia will see objects as dim as $V \sim 20$.
 
-The Gaia mission, soon to publish its second data release (DR2), is expected to discover an unprecedented number of white dwarfs, probably as many as $\sim$ 200,000 \citep{2014A&A...565A..11C,Jordan:2006jg}. Gaia will also provide astrometric information, which previously has not been available for such dim objects. This will break the degeneracy between distance and size in photometric or spectrographic observations, which otherwise makes white dwarf astrostatistics quite difficult. With the enormous size of this data sample, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the white dwarf population in the solar neighborhood, using SDSS \emph{ugriz} photometry and Gaia astrometry.
+%White dwarfs are the eventual remnants of all light to intermediate mass stars. Upheld by electron degeneracy pressure and with no internal fusion, they are approximately Earth sized objects that cool over billions of years. A population of white dwarfs carries information about the star formation history and dynamical history of its environment. They also constrain models of stellar evolution and beyond Standard Model particle physics. White dwarfs are known to be SN1A thermonuclear supernovae progenitors, although the explosion mechanism is not known, which is something Milky Way white dwarf statistics could constrain.
 
-We generate a mock data sample of white dwarfs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and Gaia, and sample construction selection effects are taken into account. We retain the parameters of the population model using a Bayesian Hierarchical Model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We also show that small systematic errors in photometry or the assumed spatial number density distribution can give rise to large biases, but that these biases are quenched in the presence of Gaia astrometry.
+With the enormous size of the Gaia data set, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the white dwarf population in the solar neighborhood, using SDSS \emph{ugriz} photometry and Gaia astrometry. We generate a mock data sample of white dwarfs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and Gaia, and sample construction selection effects are taken into account. We retain the parameters of the population model using a Bayesian hierarchical model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We also show that small systematic errors in photometry or the assumed spatial number density distribution can give rise to large biases, but that these biases are quenched in the presence of Gaia astrometry.
 
-We also discuss how the expand the statistical model when considering several different white dwarf populations with different properties. There are a number of ways to divide the total white dwarf population into subpopulation; the main ones are the following: (i) White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. (ii) Disk and halo white dwarf populations are expected to have different properties. The halo population is older, and holds information about the Milky Way's distant past. (iii) Although very poorly constrained, a significant fraction of binary white dwarf systems are expected. We show that such a subpopulation can be identified with photometric and astrometric information alone.
+We also discuss how to expand the statistical model when considering several different white dwarf populations with different properties. We consider the following divisions of the total white dwarf population into subpopulations: (i) White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. (ii) Disk and halo white dwarf populations are expected to have different properties. The halo population is older, and holds information about the Milky Way's distant past. (iii) Although very poorly constrained, a significant fraction of binary white dwarf systems are expected. We show that such a subpopulation can be identified with photometric and astrometric information alone.
 
 This paper is organized as follows...
 
@@ -213,7 +213,7 @@ The data of each respective white dwarf is listed in table \ref{tab:parameters}.
 
 The likelihood of an $i$th object is
 
-\begin{equation}
+\begin{equation}\label{eq:likelihood}
 	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{c} \mathcal{N}(m_c(\objp_i)|\hat{m}_c,\sigma_{\hat{m}_c}),
 \end{equation}
 where the color bands iterated over in the product are $c = \{u,g,r,i,z\}$, and $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$. The factor containing parallax information is dropped when no parallax information is present.
@@ -454,8 +454,14 @@ where $\pr(N | \bar{N})$ is a Poisson number count likelihood. The total number 
 
 \subsection{Binary population}
 
-Holy grail.
+Binary white dwarf systems can be identified using only photometry and astrometry, in a similar way as what was used in \cite{2018arXiv180108547W}. For a binary system, the likelihood is the same as is written in equation \eqref{eq:likelihood}, the difference being that the \emph{ugriz} apparent luminosities of the two component stars are added together, according to
 
+\begin{equation}
+	m_\text{sum} = - \frac{5}{2}\log_{10}\left( 10^{-\frac{5}{2}m_{A}}+10^{-\frac{5}{2}m_{B}}  \right),
+\end{equation}
+where $m_A$ and $m_B$ are the apparent magnitudes of the two component stars, in the relevant photometric band.
+
+\aw{IDEA: Show ROC curves for identification of white dwarf binary systems, where the component stars are drawn randomly from the single WD population, given a fixed and known population model. What do you think?}
 
 
 
