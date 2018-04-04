@@ -464,16 +464,26 @@ Binary white dwarf systems can be identified using only photometry and astrometr
 \end{equation}
 where $m_A$ and $m_B$ are the apparent magnitudes of the two component stars, in the relevant photometric band.
 
-\aw{IDEA: Show ROC curves for identification of white dwarf binary systems, where the component stars are drawn randomly from the single WD population, given a fixed and known population model. What do you think?}
+The posterior density of a binary will be written in terms of 5 parameters instead of 3, as we have temperature and surface gravity of two component stars (although at the same parallax, assuming a tight orbit).
 
+We construct a population of mock binaries by random pairing of the singles population and the same selection criteria, although we also add a constraint in terms of cooling time of the two component stars. In addition to the effective temperature and surface gravity distributions of the two component stars, as described by equation \eqref{eq:T&g}, we also have an additional term
+
+\begin{equation}\label{eq:time_difference}
+	\exp\left(
+	-\frac{[t_\text{cool}(\Teff_A,\logg_A)-t_\text{cool}(\Teff_B,\logg_B)]^2}{2\times (10^9~\text{yrs})^2}
+	\right),
+\end{equation}
+where $t_\text{cool}(\Teff_{\{A,B\}},\logg_{\{A,B\}})$ is the cooling time of the respective component stars, as given by the Bergeron atmospheric model.
+
+Figure \ref{fig:ROC_binaries} shows a receiver operator characteristic (ROC) curve for identification of binaries. The binaries are inferred with knowledge of the underlying population model. It is clear from the figure that most binaries can be very strongly identified, even with a zero false positive rate. The chosen time difference of $\sim 10^9$ years, set in equation \eqref{eq:time_difference}, prohibits the pairing of extremely cool and faint white dwarfs with hotter ones. The ROC curve is highly dependent on the allowed difference in cooling time. A stronger constraint on the difference in cooling time makes the component stars of more comparable brightness, and binaries are therefore easier to detect, and vice versa when a larger difference in cooling time is allowed.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{ROC_binaries.pdf}
-    \caption{Binary ROC plot. \aw{Plot will be ready shortly.}}
+    \caption{A receiver operator characteristic (ROC) curve of binary identification, showing the rate of false positives versus true positives.}
     \label{fig:ROC_binaries}
 \end{figure}
 
-
+This identification is made on mock data when the underlying population model is known. Working with actual data comes with many complications, not least the fact that the population model is unknown and inferred. Even so, this test shows that it should be possible to detect and infer properties about white dwarf binary population. An important aspect that is not accounted for here is that white dwarf binaries are not drawn from the same distribution of masses as the population of single white dwarfs. A tight binary system goes through phases of mass transfer and shared envelopes; thus a white dwarf binary component is expected to have low mass and surface gravity. This would actually make binaries even easier to detect, as they are brighter due to multiplicity, and brighter still from being low mass and larger in size.
 
 
 
