@@ -60,6 +60,7 @@
 \newcommand{\pr}{\text{Pr}}
 \newcommand{\de}{\text{d}}
 \newcommand{\kpc}{\text{kpc}}
+\newcommand{\K}{\text{K}}
 
 
 % Please keep new commands to a minimum, and use \newcommand not \def to avoid
@@ -72,16 +73,20 @@
 
 % Title of the paper, and the short title which is used in the headers.
 % Keep the title short and informative.
-\title[Inferring properties of the White Dwarf population]{Inferring properties of the White Dwarf population of the Milky Way using astrometry and photometry}
+\title[Inferring properties of the white dwarf population]{Inferring properties of the White Dwarf population of the Milky Way using astrometry and photometry}
 
 % The list of authors, and the short list which is used in the headers.
 % If you need two or more lines of authors, add an extra line using \newauthor
-\author[A. Widmark]{
-Axel Widmark$^1$\thanks{E-mail: axel.widmark@fysik.su.se} 
+\author[A. Widmark et al.]{
+Axel Widmark,$^1$\thanks{E-mail: axel.widmark@fysik.su.se} 
+D. Mortlock,$^{1,2}$
+H. Peiris$^{1,3}$
 \\
 % List of institutions
 $^1$The Oskar Klein Centre for Cosmoparticle Physics, Department of
 Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
+$^2$Imperial\\
+$^3$UCL\\
 }
 
 % These dates will be filled out by the publisher
@@ -98,9 +103,9 @@ Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
 
 % Abstract of the paper
 \begin{abstract}
-The Gaia mission will provide precise astrometry for an unprecedented number of white dwarfs, for which there is enormous scientific potential. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. In this article we demonstrate how to do this using a mock data set with SDSS \emph{ugriz} photometry and astrometric information expected from future Gaia data releases.
-We do so in the framework of a Bayesian Hierarchical Model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference. We also show that the inference becomes more robust and less sensitive to systematic errors.
-This is a powerful method to constrain stellar evolution, Type 1a supernovae progenitor scenarios, as well as the star formation history and dynamical history of the Milky Way.
+The Gaia mission will provide precise astrometry for an unprecedented number of white dwarfs, promising enormous scientific potential. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and astrometric information expected from future Gaia data releases.
+Our technique utilises a Bayesian hierarchical model, a powerful tool for inferring properties of a stellar population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference, leading to more robust conclusions which are less sensitive to systematic errors.
+This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -133,40 +138,11 @@ This paper is organized as follows...
 
 
 
-\section{Method}\label{sec:method}
-
-The full posterior on both population parameters and object parameters is written
-
-\begin{equation}\label{eq:fullposterior}
-	\pr(\popp,\objp | \data ) = \pr(\popp)
-    \prod_i \frac{S(\data_i) \pr(\data_i|\objp_i) \pr(\objp_i | \popp)}{\bar{N}(S,\popp)},
-\end{equation}
-where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the probability of being selected given the data of that object; $\pr(\data_i|\objp_i)$ is the likelihood of the data of an object given its object parameters; $\pr(\objp_i | \popp)$ is the probability of object parameters given the population parameters; finally, $\bar{N}(S,\popp)$ is the normalization to $\pr(\objp_i | \popp)$, and depends on the selection function and the population parameters.
 
 
+\section{Model}\label{sec:model}
 
-\begin{table}
-	\centering
-	\caption{The 4 population parameters of our model, the 3 object parameters, and the data of the respective stars.}
-	\label{tab:parameters}
-    \begin{tabular}{l}
-		\hline
-		Population parameters, $\popp$ \\
-		\hline
-		$\alpha$,\quad $\bar{g}$,\quad $\sigma_g$,\quad $\gamma_g$ \\
-        \hline
-        Object parameters, $\objp_{i=1,...,n}$ \\
-        \hline
-        $\Teff$,\quad $\logg$,\quad $\Delta$ \\
-        \hline
-        Data, $\data_{i=1,...,n}$ \\
-        \hline
-        $\hat{\varpi}$,\quad $\sigma_{\hat{\varpi}}$,\quad $\hat{m}_{c=\{u,g,r,i,z\}}$,\quad $\sigma_{\hat{m}_c}$,\quad $l$,\quad $b$ \\
-		\hline
-	\end{tabular}
-\end{table}
-
-\subsection{Population model}\label{sec:populationmodel}
+In this section we describe a model for the Milky Way white dwarf population. This population model includes the white dwarf spatial distribution, as well as distributions in intrinsic white dwarf properties, parameterized by effective temperature, surface gravity, and type.
 
 We list the population parameters of our model, encapsulated in a vector $\popp$, in table \ref{tab:parameters}, along with the object parameters and data. The population parameters are $\alpha$, which parameterizing the distribution of temperatures, and $\bar{g}$, $\sigma_g$, $\gamma_g$ which parameterize the distribution of surface gravities.
 
@@ -174,11 +150,15 @@ The distribution of surface gravity and effective temperature are parameterized 
 
 \begin{equation}\label{eq:T&g}
 \begin{split}
-	\pr(\logg | \popp) & = t(\logg|\bar{g},\sigma_g,\gamma_g),\\
-    \pr(\Teff | \popp) & = \exp (-\alpha \Teff),
+	\pr(\logg | \popp) & \propto \Theta(\logg \in [7,9.5]) \times t(\logg|\bar{g},\sigma_g,\gamma_g),\\
+    \pr(\Teff | \popp) & \propto \Theta(\Teff \in [1500,120000]~\K) \times \exp (-\alpha \Teff),
 \end{split}
 \end{equation}
-where $t(\logg)$ is the Student's t-distribution, with variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$. In this sense the quantity $\gamma_g$ parameterizes the heaviness of the tails of the t-distribution. The surface gravity $\logg$ is limited to the interval $(7,9.5)$. The temperature is limited to the interval $(1500,20000)$ K. In effect, this lower limit of 1500 K is not seen due to selection effects.
+where $t(\logg)$ is the Student's t-distribution, with variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$, and $\Theta$ is a step function. In this sense the quantity $\gamma_g$ parameterizes the heaviness of the tails of the t-distribution. The surface gravity $\logg$ is limited to the interval $[7,9.5]$. The temperature is limited to the interval $[1500,120000]~\K$. In effect, the lower and upper bounds to the temperature are not seen due to selection effects.
+
+The class of the object constitutes a third parameter of the intrinsic white dwarf properties. This is not continuous but a label, denoting for example if the white dwarf is of DA or DB classification.
+
+Given the intrinsic properties of a white dwarf, the absolute magnitude in different photometric bands can be calculated using a stellar model. In this paper, we use the Bergeron atmospheric model for white dwarfs \citep{Bergeron:1995we,Finley:1997zz,Bergeron:2000ce,2001PASP..113..409F}.
 
 Also included in our model is a white dwarf number density function, expressed in terms of cylindrical coordinates $R$, $Z$ and $\Phi$,
 
@@ -202,26 +182,75 @@ where $f_\text{thick}=0.06$, $f_\text{halo}=6\times10^{-5}$, $L_\text{thin}=L_\t
 \end{equation}
 The azimuthal angle can be neglected, as the galaxy is assumed to be axisymmetric in this model.
 
-\aw{Population parameter prior should probably be written here}
+
+
+\begin{table}
+	\centering
+	\caption{The 4 population parameters of our model, the 3 object parameters, and the data of the respective stars.}
+	\label{tab:parameters}
+    \begin{tabular}{l}
+		\hline
+		Population parameters, $\popp$ \\
+		\hline
+		$\alpha$,\quad $\bar{g}$,\quad $\sigma_g$,\quad $\gamma_g$ \\
+        \hline
+        Object parameters, $\objp_{i=1,...,n}$ \\
+        \hline
+        $\Teff$,\quad $\logg$,\quad type,\quad $\mathbf{x}$ \\
+        \hline
+        Data, $\data_{i=1,...,n}$ \\
+        \hline
+        $\hat{m}_b$,\quad $\sigma_{\hat{m}_b}$,\quad $\hat{\varpi}$,\quad $\sigma_{\hat{\varpi}}$,\quad $l$,\quad $b$ \\
+		\hline
+	\end{tabular}
+\end{table}
 
 
 
 
+\section{Data}\label{sec:data}
 
+We will demonstrate how to infer properties of a white dwarf population given photometric and astrometric data. We begin by discussing the general case and how to construct a likelihood for the properties of a white dwarf. We then discuss the specific case of combining SDSS photometry and Gaia astrometry, and what errors are expected for the two surveys.
 
+The data of a white dwarf consists of apparent magnitude in some number of photometric bands ($\hat{m}_b$), a parallax measurement ($\hat{\varpi}$), angular position ($l$ and $b$), and errors on these observables. A hatted quantity ($\hat{\varpi}$) refers to an observed value of some measurement error, while a non-hatted quantity ($\varpi$) refers to an observable's true value. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected. The data of a white dwarf with index $i$, called $\data_i$, is listed in Table \ref{tab:parameters}.
 
-\subsection{Data and likelihood}\label{sec:data}
-
-The data of each respective white dwarf is listed in table \ref{tab:parameters}. A hatted quantity ($\hat{\varpi}$) refers to an observed value of some measurement error, while a non-hatted quantity ($\varpi$) refers to an observable's true value. The data of a white dwarf consists of parallax measurement $\hat{\varpi}$ and error $\sigma_{\hat{\varpi}}$, apparent magnitude in five bands $\hat{m}_{c=\{u,g,r,i,z\}}$ with their respective errors $\sigma_{\hat{m}_c}$, and finally the angular position on the sky $\{l,b\}$. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected.
-
-The likelihood of an $i$th object is
+The likelihood of a white dwarf, denoted by an index $i$, is written
 
 \begin{equation}\label{eq:likelihood}
-	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{c} \mathcal{N}(m_c(\objp_i)|\hat{m}_c,\sigma_{\hat{m}_c}),
+	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{b} \mathcal{N}(m_b(\objp_i)|\hat{m}_b,\sigma_{\hat{m}_b}),
 \end{equation}
-where the color bands iterated over in the product are $c = \{u,g,r,i,z\}$, and $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$. The factor containing parallax information is dropped when no parallax information is present.
+where the color bands are iterated over in the product, and $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$. The factor containing parallax information is dropped when no parallax information is present. The apparent magnitudes $m_b(\objp_i)$ are functions of the object parameters, coming from a stellar model.% Absolute magnitudes $M_c$ in the \emph{ugriz} color bands come from the atmospheric models of Bergeron, as functions of effective temperature $\Teff$ and surface gravity $\logg$.
 
-The magnitudes $m_c(\objp_i)$ are functions of the object parameters. Absolute magnitudes $M_c$ in the \emph{ugriz} color bands come from the atmospheric models of Bergeron, as functions of effective temperature $\Teff$ and surface gravity $\logg$.
+In this article, we use SDSS photometry in \emph{ugriz} color bands, and a Bergeron atmospheric stellar model, as discussed in Sec. \ref{sec:model}. In order to assign realistic errors to the mock data that we generate, we use median errors of the SDSS DR9 catalogue, in bins of observed apparent magnitude of width 0.5 mag. These median errors are visible in Fig. \ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude error to 0.01, in order to account for possible systematic errors.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{median_app_errors.pdf}
+    \caption{The median magnitude errors in SDSS DR9, as a function of observed apparent magnitude.}
+    \label{fig:magnitude_error}
+\end{figure}
+
+We use parallax information with precision expected from Gaia DR2. DR2 will have a limiting magnitude of $G=21$, with parallax uncertainties smaller than $0.04$ mas for sources with $G<15$, about $0.1$ mas for sources with $G=17$, and about $0.7$ mas at $G=20$.\footnote{https://www.cosmos.esa.int/web/gaia/dr2} In order to account for this magnitude dependence, we interpolate these points according to Fig. \ref{fig:parallax_error}.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{parallax_error.pdf}
+    \caption{Parallax error as a function of $G$ magnitude. The dots correspond to magnitudes $G=15,17,20$. For $G\leq 15$ the parallax error is 0.04 mas and constant.}
+    \label{fig:parallax_error}
+\end{figure}
+
+
+
+
+
+\section{Method}\label{sec:method}
+
+The full posterior on both population parameters and object parameters is written
+
+\begin{equation}\label{eq:fullposterior}
+	\pr(\popp,\objp | \data ) = \pr(\popp)
+    \prod_i \frac{S(\data_i) \pr(\data_i|\objp_i) \pr(\objp_i | \popp)}{\bar{N}(S,\popp)},
+\end{equation}
+where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the probability of being selected given the data of that object; $\pr(\data_i|\objp_i)$ is the likelihood of the data of an object given its object parameters; $\pr(\objp_i | \popp)$ is the probability of object parameters given the population parameters; finally, $\bar{N}(S,\popp)$ is the normalization to $\pr(\objp_i | \popp)$, and depends on the selection function and the population parameters.
+
 
 
 
@@ -234,7 +263,7 @@ The magnitudes $m_c(\objp_i)$ are functions of the object parameters. Absolute m
 
 Each white dwarf has a set of object parameters encapsulated in $\objp_i$, as listed in table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, and $\Delta$ which parameterizes the distance.
 
-Conceptually, the most straight forward parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. This is illustrated in figure \ref{fig:banana}. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
+Conceptually, the most straight forward parameterization would be to have the distance $d$ as the third object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance. This is illustrated in Fig. \ref{fig:banana}. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the color factor of the likelihood function, like
 
 \begin{equation}
 	\tilde{d} = 
@@ -292,7 +321,7 @@ We make the following cut in color, demanding that
 \begin{equation}
 	\hat{\delta}_{ugr} \equiv 0.27\hat{m}_u+0.23\hat{m}_g-0.5\hat{m}_r>-0.183.
 \end{equation}
-Without measurement errors, this cut corresponds to limiting the white dwarf temperature to $\Teff<20,000$ K. This is illustrated in figure \ref{fig:colors_cut}.
+Without measurement errors, this cut corresponds to limiting the white dwarf temperature to $\Teff<20,000$ K. This is illustrated in Fig. \ref{fig:colors_cut}.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{colors_cut.pdf}
@@ -326,25 +355,9 @@ assuming that the different color band errors are uncorrelated.
 
 \subsection{Generating a mock data catalogue}
 
-The errors in photometric magnitude vary with apparent magnitude. In order to account for this effect and have realistic errors for our mock data set, we set the errors of our object to the median errors of SDSS DR9, in bins of observed apparent magnitude of width 0.5 mag. This is visible in figure \ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude error to 0.01, in order to account for possible systematic errors.
-
-\begin{figure}
-	\includegraphics[width=\columnwidth]{median_app_errors.pdf}
-    \caption{The median magnitude errors in SDSS DR9, as a function of observed apparent magnitude.}
-    \label{fig:magnitude_error}
-\end{figure}
-
-Gaia DR2 will have a limiting magnitude of $G=21$, with parallax uncertainties smaller than $0.04$ mas for sources with $G<15$, about $0.1$ mas for sources with $G=17$, and about $0.7$ mas at $G=20$.\footnote{https://www.cosmos.esa.int/web/gaia/dr2} In order to account for this magnitude dependence, we interpolate these points according to figure \ref{fig:parallax_error}.
-
-\begin{figure}
-	\includegraphics[width=\columnwidth]{parallax_error.pdf}
-    \caption{Parallax error as a function of $G$ magnitude. The dots correspond to magnitudes $G=15,17,20$. For $G\leq 15$ the parallax error is 0.04 mas and constant.}
-    \label{fig:parallax_error}
-\end{figure}
-
 The mock catalogue is generated by rejection sampling. An object is drawn randomly from the true population model: the object parameters $\Teff$ and $\logg$ are distributed as described in \eqref{eq:T&g} and can be randomized analytically; the position is distributed according to $n(\mathbf{x})$ and can be randomized by rejection sampling, knowing that there is a maximal distance a white dwarf can have to be included in our sample (observational errors included). A randomly drawn object is then given observable quantities with errors as described above. If the object observables fulfill the selection cuts, the object is included in the sample; if not, it is rejected.
 
-In this article, we construct a sample with 10,000 DA white dwarfs. The distribution of true parameter values is visible in figure \ref{fig:10000WDs}. In this figure, selection effects are manifest. The maximum distance is clearly seen as a function of temperature (and surface gravity, to lesser extent) in the bottom panel. Even though cool stars are much more numerous in terms of spatial number density, it is actually hot stars near 20,000 K that dominate our sample, as they are seen to further distance. Very far away white dwarfs have low apparent luminosity and hence large color errors; this gives some scatter in the selection function such that the upper limit on temperature is blurred. The hottest object in this sample has an effective temperature of $\Teff=28,240$ K, and is located at a distance of 1.22 kpc. The two most distant objects are located at 1.27 kpc, and has surface gravities of $\logg=7.82$ and $\logg=7.71$, which is illustrative of the fact that lower surface white dwarfs are brighter and therefore seen to further distance. The lowest temperature white dwarf of our sample has a temperature of 1717 K.
+In this article, we construct a sample with 10,000 DA white dwarfs. The distribution of true parameter values is visible in Fig. \ref{fig:10000WDs}, where selection effects are manifest. The maximum distance is clearly seen as a function of temperature (and surface gravity, to lesser extent) in the bottom panel. Even though cool stars are much more numerous in terms of spatial number density, it is actually hot stars near 20,000 K that dominate our sample, as they are seen to further distance. Very far away white dwarfs have low apparent luminosity and hence large color errors; this gives some scatter in the selection function such that the upper limit on temperature is blurred. The hottest object in this sample has an effective temperature of $\Teff=28,240$ K, and is located at a distance of 1.22 kpc. The two most distant objects are located at 1.27 kpc, and has surface gravities of $\logg=7.82$ and $\logg=7.71$, which is illustrative of the fact that lower surface white dwarfs are brighter and therefore seen to further distance. The lowest temperature white dwarf of our sample has a temperature of 1717 K.
 
 Our sample size of 10,000 DA white dwarfs is a reasonable number of white dwarfs given the cuts BLABLA
 
@@ -362,7 +375,7 @@ Our sample size of 10,000 DA white dwarfs is a reasonable number of white dwarfs
 
 RUN CHAIN WITH BURN-IN AND YADA YADA
 
-The inferred posterior distributions are visible in figures \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information.
+The inferred posterior distributions are visible in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information.
 
 \begin{figure*}
 	\includegraphics[width=.8\textwidth]{toy_chain.pdf}
