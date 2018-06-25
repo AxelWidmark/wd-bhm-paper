@@ -82,14 +82,15 @@
 % If you need two or more lines of authors, add an extra line using \newauthor
 \author[A. Widmark et al.]{
 Axel Widmark,$^1$\thanks{E-mail: axel.widmark@fysik.su.se} 
-Daniel Mortlock,$^{1,2}$
-Hiranya V. Peiris$^{1,3}$
+Daniel Mortlock,$^{2,3}$
+Hiranya V. Peiris$^{1,4}$
 \\
 % List of institutions
 $^1$The Oskar Klein Centre for Cosmoparticle Physics, Department of
 Physics, Stockholm University, AlbaNova, 10691 Stockholm, Sweden\\
-$^2$Imperial\\
-$^3$UCL\\
+$^2$Astrophysics Group, Imperial College London, Blackett Laboratory, Prince Consort Road, London SW7 2AZ, UK\\
+$^3$Department of Astronomy, Stockholm University, AlbaNova, SE-10691 Stockholm, Sweden\\
+$^4$Department of Physics and Astronomy, University College London, Gower Street, London, WC1E 6BT, UK\\
 }
 
 % These dates will be filled out by the publisher
@@ -106,9 +107,9 @@ $^3$UCL\\
 
 % Abstract of the paper
 \begin{abstract}
-The Gaia mission will provide precise astrometry for an unprecedented number of white dwarfs, promising enormous scientific potential. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and astrometric information expected from future Gaia data releases.
-Our technique utilises a Bayesian hierarchical model, a powerful tool for inferring properties of a stellar population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference, leading to more robust conclusions which are less sensitive to systematic errors.
-This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
+The \emph{Gaia} mission will provide precise astrometry for an unprecedented number of white dwarfs. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
+Our technique utilises a Bayesian hierarchical model for inferring properties of a white dwarf population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference, leading to more robust conclusions which are less sensitive to systematic errors.
+\aw{Should I delete this sentence then?} This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -129,15 +130,15 @@ white dwarfs -- stars: statistics -- astrometry
 
 \section{Introduction}
 
-White dwarfs (WDs) are the eventual remnants of all light to intermediate mass stars \citep{1996ApJ...460..489R}. The local WD population carries information about the Galaxy's star formation history and dynamical history and constrain models of stellar evolution \citep{2016NewAR..72....1G,2018arXiv180505849E}. WDs are known to be SN1A thermonuclear supernovae progenitors, although the explosion mechanism is poorly understood \citep{Livio:2018rue}.
+White dwarfs (WDs) are the remnants of all light-to-intermediate mass stars \citep{1996ApJ...460..489R}. The local WD population carries information about the Galaxy's star formation history and dynamical history and constrain models of stellar evolution \citep{1987ApJ...315L..77W,2016NewAR..72....1G,2018arXiv180505849E}. WDs are known to be Type 1a thermonuclear supernovae progenitors, although the explosion mechanism is poorly understood \citep{Livio:2018rue}.
 
-The Sloan Digital Sky Survey (SDSS) catalogues a total number of $\sim 29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that they have no fixed mass or size, such that their observational properties are largely degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this can be sensitive to systematic errors. The Gaia mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by something like an order of magnitude \citep{2014A&A...565A..11C,Jordan:2006jg}. Gaia will also provide astrometric information for local neighborhood WDs, which previous astrometric missions were unable to do. Hipparcos had a limiting apparent magnitude of $V \sim 12.4$, while Gaia will see objects as dim as $G \sim 21$.
+The Sloan Digital Sky Survey (SDSS) catalogues a total number of $\sim 29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that they have no fixed mass or size, such that their observational properties are largely degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this can be sensitive to systematic errors. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by something like an order of magnitude \citep{2014A&A...565A..11C,Jordan:2006jg}. \emph{Gaia} will also provide astrometric information for local neighborhood WDs, which previous astrometric missions were unable to do. \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as dim as $G \sim 21$.
 
-With the enormous size of the Gaia data set, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the WD population in the solar neighborhood, using SDSS \emph{ugriz} photometry and Gaia astrometry. We generate a mock data sample of WDs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and Gaia, and sample construction selection effects are taken into account. We retain the parameters of the population model using a Bayesian hierarchical model, which is a powerful tool to infer properties of a stellar population while also taking into account all observational errors of individual stars.
+With the enormous size of the \emph{Gaia} data set, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the WD population in the solar neighborhood, using SDSS \emph{ugriz} photometry and \emph{Gaia} astrometry. We generate a mock data sample of WDs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and \emph{Gaia}, and sample construction selection effects are taken into account.
 
-White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. We demonstrate that we are able to infer the relative stellar number ratio of DA and DB systems. We also discuss how to expand the statistical model when considering other WD sub--populations. We consider separate disk and halo WD populations, which are expected to have different properties. The halo population is older, and holds information about the Milky Way's distant past. We also discuss the possibility of identifying binary WD systems using this method, which can be done using photometric and astrometric information alone.
+In a WD population model, it is physically meaningful to divide the total population into WD sub-populations. White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated \citep{Tremblay:2007hq,2011ApJ...737...28B,2015A&A...583A..86K}. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. We also discuss how to expand the statistical model when considering other WD sub-populations, such as separate disk and halo WD populations \citep{1998ApJ...503..239I,2016MNRAS.463.2453D}. We also discuss the possibility of identifying binary WD systems \citep{2018MNRAS.476.2584M} and demonstrate how to do so using photometric and astrometric information alone.
 
-This paper is organized as follows. In Section~\ref{sec:model} we outline our model for the WD population. In Section~\ref{sec:data} we describe the observational data that we consider. In Section~\ref{sec:method} we present out method of statistical inference. In Section~\ref{sec:mock} we generate a mock data catalogue and use our statistical method to infer the population model parameters from the data. In Section~\ref{sec:subpopulations} we discuss possible extensions to the WD model, such as differentiating between disk and halo subpopulations, as well the possibility of identifying double--degenerate binary WD systems. Finally, in Section~\ref{sec:discussion} we discuss and conclude.
+This paper is organized as follows. \aw{What should I write instead of 'In Sec...'?} In Sec.~\ref{sec:model} we outline our model for the WD population. In Sec.~\ref{sec:data} we describe the observational data that we consider. In Sec.~\ref{sec:method} we present out method of statistical inference. In Sec.~\ref{sec:mock} we generate a mock data catalogue and use our statistical method to infer the population model parameters from the data. In Sec.~\ref{sec:subpopulations} we discuss possible extensions to the WD model, such as differentiating between disk and halo subpopulations, as well the possibility of identifying double-degenerate binary WD systems. Finally, in Sec.~\ref{sec:discussion} we discuss and conclude.
 
 
 
@@ -145,20 +146,20 @@ This paper is organized as follows. In Section~\ref{sec:model} we outline our mo
 
 \section{Model}\label{sec:model}
 
-In this section we describe a model for the Milky Way WD population. This population model includes the WD spatial distribution, as well as distributions in intrinsic WD properties, parameterized by effective temperature, surface gravity, and type.
+In this section we describe a model for the Milky Way WD population. This population model includes the WD spatial distribution, as well as distributions in intrinsic WD properties, parametrized by effective temperature, surface gravity, and type.
 
-We list the population parameters of our model, encapsulated in a vector $\popp$, in table \ref{tab:parameters}, along with the object parameters and data. The population parameters are $\alpha$, which parameterizing the distribution of temperatures, $\bar{g}$, $\sigma_g$, $\gamma_g$ which parameterize the distribution of surface gravities, and $f_\text{DB}$ which is the fraction of DB class WDs.
+We list the population parameters of our model, encapsulated in a vector $\popp$, in Table \ref{tab:parameters}, along with the object parameters and data. The population parameters are $\alpha$, which parametrizing the distribution of temperatures, $\bar{g}$, $\sigma_g$, $\gamma_g$ which parametrize the distribution of surface gravities, and $f_\text{DB}$ which is the fraction of DB class WDs.
 
-The distribution of surface gravity and effective temperature are parameterized by
+The distribution of surface gravity and effective temperature are parametrized by
 \begin{equation}\label{eq:T&g}
 \begin{split}
 	\pr(\logg | \popp) & \propto \Theta(\logg \in [7,9]) \times f_t(\logg|\bar{g},\sigma_g,\gamma_g),\\
     \pr(\Teff | \popp) & \propto \Theta(\Teff/\K \in [1500,120000]) \times \exp (-\alpha \Teff),
 \end{split}
 \end{equation}
-where $\Theta$ is a step function, $f_t(\logg)$ is the Student's t-distribution of width $\sigma_g$ and variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$, such that the quantity $\gamma_g$ parameterizes the heaviness of the distribution's tails. The surface gravity $\logg$ is limited to the interval $[7,9]$.
+where $\Theta$ is a step function, $f_t(\logg)$ is Student's $t$-distribution of width $\sigma_g$ and variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$, such that the quantity $\gamma_g$ parametrizes the heaviness of the distribution's tails.
 
-The class of the object constitutes a third parameter of the intrinsic WD properties, called $t$. This is not continuous but a label, denoting for example if the WD is of DA or DB classification. The probabilities are written in terms of $f_\text{DB}$, like
+The class of the object constitutes a third parameter of the intrinsic WD properties, called $t$. This is not continuous but a label, denoting for example if the WD is of DA or DB classification. The probabilities are written in terms of the fraction of DB stars, like
 \begin{equation}\label{eq:DADB}
 \begin{split}
 	\pr(t=\text{DA} | \popp) & = (1-f_\text{DB}),\\
@@ -168,7 +169,7 @@ The class of the object constitutes a third parameter of the intrinsic WD proper
 
 Given the intrinsic properties of a WD, the absolute magnitude in different photometric bands can be calculated using a stellar model. In this paper, we use the Bergeron atmospheric model for WDs \citep{Bergeron:1995we,Finley:1997zz,Bergeron:2000ce,2001PASP..113..409F}.
 
-Also included in our model is a WD number density function, expressed in terms of cylindrical coordinates $R$, $Z$ and $\Phi$,
+Also included in our model is a WD number density function, based on a Galactic model by \cite{2008ApJ...673..864J}, expressed in terms of cylindrical coordinates $R$, $Z$ and $\Phi$,
 \begin{equation}\label{eq:numberdensity}
 \begin{split}
 	n(\mathbf{x}) \propto
@@ -179,14 +180,14 @@ Also included in our model is a WD number density function, expressed in terms o
 	\Bigg]
 \end{split}
 \end{equation}
-where $f_\text{thick}=0.06$, $f_\text{halo}=6\times10^{-5}$, $L_\text{thin}=L_\text{thick}=3.5~\kpc$, $L_\text{halo}=8.5~\kpc$, $R_\text{core}=1~\kpc$, $H_\text{thin}=0.26~\kpc$, $H_\text{thick}=1~\kpc$, $q_\text{halo}=0.64$ and $\eta_\text{halo} = 2$. Assuming a solar position of $R_\odot=8~\kpc$ (where the height of the Sun above the plane is neglected), the galactic coordinates are given by heliocentric coordinates through
+where $f_\text{thick}=0.06$, $f_\text{halo}=6\times10^{-5}$, $L_\text{thin}=L_\text{thick}=3.5~\kpc$, $L_\text{halo}=8.5~\kpc$, $R_\text{core}=1~\kpc$, $H_\text{thin}=0.26~\kpc$, $H_\text{thick}=1~\kpc$, $q_\text{halo}=0.64$ and $\eta_\text{halo} = 2$. Assuming a solar position of $R_\odot=8~\kpc$ (where the height of the Sun above the plane is neglected), the Galactic coordinates are given by heliocentric coordinates through
 \begin{equation}
 \begin{split}
 	& R(d,l,b) = [d^2\cos^2b-2 R_\odot d \cos^2b\cos^2+R_\odot^2]^{1/2}, \\
 	& Z(d,l,b) = d \sin b.
 \end{split}
 \end{equation}
-The azimuthal angle can be neglected, as the galaxy is assumed to be axisymmetric in this model.
+The azimuthal angle can be neglected, as the Galaxy is assumed to be axisymmetric in this model.
 
 
 
@@ -198,27 +199,27 @@ The azimuthal angle can be neglected, as the galaxy is assumed to be axisymmetri
 		\hline
 		$\popp$  & Population parameters \\
 		\hline
-		$\alpha$ & -- slope of temperature distribution \\
-		$\bar{g}$ & -- mean surface gravity $\logg$ \\
-		$\sigma_g$ & -- width of $\logg$ distribution \\
-		$\gamma_g$ & -- heaviness of the tails of the $\logg$ distribution \\
-		$f_\text{DB}$ & -- the fraction of DB type WDs \\
+		$\alpha$ & slope of temperature distribution \\
+		$\bar{g}$ & mean surface gravity $\logg$ \\
+		$\sigma_g$ & width of $\logg$ distribution \\
+		$\gamma_g$ & heaviness of the tails of the $\logg$ distribution \\
+		$f_\text{DB}$ & the fraction of DB type WDs \\
         \hline
         $\objp_{i=1,...,N}$  & Object parameters \\
         \hline
-        $\Teff$ & -- effective temperature \\
-        $\logg$ & -- surface gravity \\
-        $t$ & -- WD classification (DA or DB) \\
-        $\mathbf{x}$ & -- spatial position  \\
+        $\Teff$ & effective temperature \\
+        $\logg$ & surface gravity \\
+        $t$ & WD classification (DA or DB) \\
+        $\mathbf{x}$ & spatial position  \\
         \hline
         $\data_{i=1,...,N}$ & Data \\
         \hline
-        $\hat{m}_b$ & -- observed photometric magnitude \\
-        $\sigma_b$ & -- magnitude uncertainty \\
-        $\hat{\varpi}$ & -- observed parallax \\
-        $\sigma_{\hat{\varpi}}$ & -- parallax uncertainty \\
-        $l$ & -- observed galactic longitude \\
-        $b$ & -- observed galactic latitude \\
+        $\hat{m}_b$ & observed photometric magnitude \\
+        $\sigma_b$ & magnitude uncertainty \\
+        $\hat{\varpi}$ & observed parallax \\
+        $\sigma_{\hat{\varpi}}$ & parallax uncertainty \\
+        $l$ & observed Galactic longitude \\
+        $b$ & observed Galactic latitude \\
 		\hline
 	\end{tabular}
 \end{table}
@@ -228,17 +229,17 @@ The azimuthal angle can be neglected, as the galaxy is assumed to be axisymmetri
 
 \section{Data}\label{sec:data}
 
-We will demonstrate how to infer properties of a WD population given photometric and astrometric data. We begin by discussing the general case and how to construct a likelihood for the properties of a WD. We then discuss the specific case of combining SDSS photometry and Gaia astrometry, and what errors are expected for the two surveys.
+We now demonstrate how to infer properties of a WD population given photometric and astrometric data. We begin by discussing the general case, showing to construct a likelihood for the properties of a WD. We then discuss the specific case of combining SDSS photometry and \emph{Gaia} astrometry.
 
-The data of a WD consists of apparent magnitude in some number of photometric bands ($\hat{m}_b$), a parallax measurement ($\hat{\varpi}$), angular position ($l$ and $b$), and errors on these observables. A hatted quantity ($\hat{\varpi}$) refers to an observed value of some measurement error, while a non-hatted quantity ($\varpi$) refers to an observable's true value. The angles $l$ and $b$ are written without hats, to signify that they are taken at face values, as the errors are small and can be neglected. The data of a WD with index $i$, called $\data_i$, is listed in Table \ref{tab:parameters}.
+The data for a given WD consist of apparent magnitude in some number of photometric bands ($\hat{m}_b$), a parallax measurement ($\hat{\varpi}$), angular position ($l$ and $b$), including the error models of these observables. A hatted quantity ($\hat{\varpi}$) refers to an observed value of some measurement error, while a non-hatted quantity ($\varpi$) refers to an observable's true value. The angles $l$ and $b$ are written without hats, to signify that their measurement uncertainties are so small that they can be neglected. The data of a WD with index $i$, called $\data_i$, is listed in Table \ref{tab:parameters}.
 
-The likelihood of a WD, denoted by an index $i$, is written
+The likelihood associated with a WD, denoted by an index $i$, is written
 \begin{equation}\label{eq:likelihood}
 	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{b} \mathcal{N}(m_b(\objp_i)|\hat{m}_b,\sigma_b),
 \end{equation}
 where the colour bands are iterated over in the product, and $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$. The factor containing parallax information is dropped when no parallax information is present. The apparent magnitudes $m_b(\objp_i)$ are functions of the object parameters, coming from a stellar model.
 
-In this article, we use SDSS photometry in \emph{ugriz} colour bands, and a Bergeron atmospheric stellar model, as discussed in Sec. \ref{sec:model}. In order to assign realistic errors to the mock data that we generate, we use median errors of the SDSS DR9 catalogue, in bins of observed apparent magnitude of width 0.5 mag. These median errors are visible in Fig. \ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude error to 0.01, in order to account for possible systematic errors.
+In this work, we use SDSS photometry in \emph{ugriz} colour bands, and a Bergeron atmospheric stellar model, as discussed in Sec. \ref{sec:model}. In order to assign realistic uncertainties to the mock data that we generate, we use median uncertainties of the SDSS DR9 catalogue, in bins of observed apparent magnitude of width 0.5 mag. These median uncertainties are visible in Fig.~\ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude uncertainty to 0.01 mag, in order to account for possible systematic uncertainties in the Bergeron atmospheric model.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{median_app_errors.pdf}
@@ -246,11 +247,11 @@ In this article, we use SDSS photometry in \emph{ugriz} colour bands, and a Berg
     \label{fig:magnitude_error}
 \end{figure}
 
-We use parallax information with precision expected from Gaia DR2. DR2 will have a limiting magnitude of $m_G \simeq 21$, with parallax uncertainties smaller than $0.04$ mas for sources with $m_G<15$, about $0.1$ mas for sources with $m_G=17$, and about $0.7$ mas at $m_G=20$.\footnote{https://www.cosmos.esa.int/web/gaia/dr2} In order to account for this magnitude dependence, we interpolate these points according to Fig. \ref{fig:parallax_error}. The errors in the Gaia photometric $G$-band are interpolated in the same manner as for the parallax, with errors of 0.3 mmag for $m_G = 13$, 2 mmag for $m_G = 17$, and 10 mmag for $m_G = 20$.
+We use parallax information with the precision of \emph{Gaia} DR2, \citep{2018arXiv180409366L}. DR2 has a limiting magnitude of $m_G \simeq 21$, with parallax uncertainties of about $0.04$ mas for sources with $m_G<15$, about $0.1$ mas for sources with $m_G=17$, and about $0.7$ mas at $m_G=20$. In order to account for this magnitude dependence, we interpolate these points as shown in Fig. \ref{fig:parallax_error}. The errors in the \emph{Gaia} photometric $G$-band are interpolated in the same manner as for the parallax, with errors of 0.3 mmag for $m_G = 13$, 2 mmag for $m_G = 17$, and 10 mmag for $m_G = 20$.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{parallax_error.pdf}
-    \caption{Parallax error as a function of Gaia $G$--band apparent magnitude $m_G$. The dots correspond to magnitudes $m_G=\{15,17,20\}$. For $m_G\leq 15$ the parallax error is 0.04 mas and constant.}
+    \caption{Parallax uncertainties as a function of \emph{Gaia} $G$-band apparent magnitude $m_G$. The dots correspond to magnitudes $m_G=\{15,17,20\}$. For $m_G\leq 15$ the parallax uncertainty is 0.04 mas and constant.}
     \label{fig:parallax_error}
 \end{figure}
 
@@ -260,14 +261,14 @@ We use parallax information with precision expected from Gaia DR2. DR2 will have
 
 \section{Method}\label{sec:method}
 
-The full posterior on both population parameters and object parameters is written
+By Bayes' Theorem, the full posterior on both population parameters and object parameters is written
 \begin{equation}\label{eq:fullposterior}
 	\pr(\popp,\objp | \data ) = \pr(\popp)
     \prod_i \frac{S(\data_i) \pr(\data_i|\objp_i) \pr(\objp_i | \popp)}{\bar{N}(S,\popp)},
 \end{equation}
-where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the probability of being selected given the data of that object; $\pr(\data_i|\objp_i)$ is the likelihood of the data of an object given its object parameters; $\pr(\objp_i | \popp)$ is the probability of object parameters given the population parameters; finally, $\bar{N}(S,\popp)$ is the normalization to $\pr(\objp_i | \popp)$, and depends on the selection function and the population parameters. When writing the data or object parameters without an index $i$, we refer to the complete set of objects, $\objp \equiv \{ \objp_1,\objp_2,...,\objp_N \}$.
+where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the probability of being selected given the data of that object; $\pr(\data_i|\objp_i)$ is the likelihood of the data of an object given its object parameters; $\pr(\objp_i | \popp)$ is the probability of object parameters given the population parameters; finally, $\bar{N}(S,\popp)$ is the normalization of $\pr(\objp_i | \popp)$, and depends on the selection function and the population parameters. When writing the data or object parameters without an index $i$, we refer to the complete set of objects, $\objp \equiv \{ \objp_1,\objp_2,...,\objp_N \}$.
 
-A directed acyclical graph (DAG) of our statistical model is visible in Fig.~\ref{fig:DAG}.
+A directed acyclical graph (DAG) of our statistical model is shown in Fig.~\ref{fig:DAG}.
 
 \begin{figure}\label{fig:DAG}
   \centering
@@ -295,18 +296,18 @@ A directed acyclical graph (DAG) of our statistical model is visible in Fig.~\re
 
 \subsection{Object parameters}\label{sec:objectparams}
 
-Each WD has a set of object parameters encapsulated in $\objp_i$, as listed in table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, the type $t$ denoting DA or DB classification, and $\Delta$ which parameterizes the distance.
+Each WD has a set of object parameters encapsulated in $\objp_i$, as listed in Table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, the type $t$ denoting DA or DB classification, and $\Delta$ which parametrizes the distance.
 
-Conceptually, the most straight forward parameterization would be to have the distance $d$ as the fourth object parameter. However, this creates some sampling difficulties coming from the fact that $\logg$ and $d$ are heavily degenerate, which is problematic especially when there is no parallax information that constrains the distance, which is illustrated in Fig.~\ref{fig:banana}. Therefore the distance is parameterized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the colour factor of the likelihood function, like
+Conceptually, the most straightforward parametrization would be to have the distance $d$ as the fourth object parameter. However, this creates some sampling difficulties arising from the fact that $\logg$ and $d$ are highly degenerate. This is problematic especially when there is no parallax information that constrains the distance, as illustrated in Fig.~\ref{fig:banana}. Therefore the distance is parametrized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the colour factor of the likelihood function,
 \begin{equation}
 	\tilde{d} = 
     h^{-1}\left( \frac{\sum_b \sigma_b^{-2} (\hat{m}_c-M_c(\Teff,\logg))}{\sum_b \sigma_b^{-2}} \right),
 \end{equation}
-where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, which is the difference between apparent to absolute magnitude. The distance parameterized by the object parameters is then $d=\Delta\tilde{d}(\Teff,\logg)$. It is crucial to account for the Jacobian factor that arises with this parameterization, which is $\de \Teff\, \de \logg\, \de d = \de \Teff\, \de \logg\, \de \Delta\, \tilde{d}(\Teff,\logg)$.
+where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, the difference between apparent and absolute magnitude. The distance parametrized by the object parameters is then $d=\Delta\tilde{d}(\Teff,\logg)$. It is crucial to account for the Jacobian factor that arises with this parametrization, which is $\de \Teff\, \de \logg\, \de d = \de \Teff\, \de \logg\, \de \Delta\, \tilde{d}(\Teff,\logg)$.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{banana.pdf}
-    \caption{A posterior density of an object with true parameters $\Teff=14000$ K, $\logg=7.9$, $t=\text{DA}$, and $d=50$ pc, with photometric errors of $\sigma_c=0.01$ in all \emph{ugriz} colour bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0$. Because the photometric errors are somewhat large, the constraint to the surface gravity is mostly due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parameterization. This illustrates the degeneracy between surface gravity $\logg$ and distance $d$, which can be problematic for a Metropolis-Hastings algorithm to sample.}
+    \caption{A posterior density of an object with true parameters $\Teff=14000$ K, $\logg=7.9$, $t=\text{DA}$, and $d=50$ pc, with photometric errors of $\sigma_c=0.01$ in all \emph{ugriz} colour bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0$. Because the photometric errors are somewhat large, the constraint to the surface gravity is mostly due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parametrization. This illustrates the degeneracy between surface gravity $\logg$ and distance $d$, which can be problematic for a Metropolis-Hastings algorithm to sample.}
     \label{fig:banana}
 \end{figure}
 
@@ -318,7 +319,7 @@ where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, which is th
 
 \subsection{Object posterior}\label{sec:objectposterior}
 
-The posterior on a specific object also includes the term $\pr(\objp_i | \popp)$, normalized by the quantity $\bar{N}(S,\popp)$. It is given by the population, parameterized by the population parameters $\popp$,
+The posterior on a specific object also includes the term $\pr(\objp_i | \popp)$, normalized by the quantity $\bar{N}(S,\popp)$. It is given by the population, parametrized by the population parameters $\popp$,
 \begin{equation}
 \begin{split}
 	& \pr(\objp_i | \popp)\, \de \Teff\, \de \logg\, \de d  \\ & \propto
@@ -328,12 +329,12 @@ The posterior on a specific object also includes the term $\pr(\objp_i | \popp)$
 \end{equation}
 where $n$ is the number density of WDs as a function of spatial position. It is implicit in this expression that the true parallax $\varpi$ is a function of the object parameters $\objp_i$.
 
-The normalization factor is given by an integral (or sum, in the case of a discrete variable) over the possible properties of a hypothetical WD drawn from the population model, times the probability of being selected, like
+The normalization factor is given by an integral (or sum, in the case of a discrete variable) over the possible properties of a hypothetical WD drawn from the population model, multiplied by the probability of being selected, like
 \begin{equation}\label{eq:normalization}
 	\bar{N}(S,\popp) = \sum_{t} \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
     \pr(\Teff,g,t | \popp)\, n(\mathbf{x})\, S(\Teff,\logg,t,\mathbf{x}).
 \end{equation}
-The probability of being selected is the probability of being included in the sample, given by an object's intrinsic properties and the sample construction cuts on observables. This is formulated later in Sec.~\ref{sec:sample_cuts} and Eq.~\eqref{eq:selection}.
+The probability of being selected is the probability of being included in the sample, given by an object's intrinsic properties and the sample construction cuts on observables. This is formulated in  the next section.
 
 
 
@@ -343,7 +344,9 @@ The probability of being selected is the probability of being included in the sa
 
 \section{Mock data and inference}\label{sec:mock}
 
-To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=1.2$, and the WD number density $n(\mathbf{x})$ as described in section \ref{sec:model}. We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from Gaia DR2.
+To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0.1$, and the WD number density $n(\mathbf{x})$ as described in Sec.~\ref{sec:model}. \cite{2011ApJ...737...28B}
+
+We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from \emph{Gaia} DR2.
 
 \subsection{Sample cuts}\label{sec:sample_cuts}
 
@@ -363,7 +366,7 @@ Without measurement errors, this cut corresponds to limiting the temperature of 
     \label{fig:colors_cut}
 \end{figure}
 
-We also make a cut in brightness, by demanding that the Gaia $G$ band apparent magnitude fulfills that
+We also make a cut in brightness, by demanding that the \emph{Gaia} $G$ band apparent magnitude fulfills that
 \begin{equation}
 	\hat{m}_G < 20.
 \end{equation}
@@ -388,7 +391,7 @@ assuming that the different colour band errors are uncorrelated.
 
 The mock catalogue is generated by rejection sampling. An object is drawn randomly from the true population model: the object parameters $\Teff$, $\logg$ and $t$ are distributed as described in Eq.~\eqref{eq:T&g} and Eq.~\eqref{eq:DADB} and can be randomized analytically; the position is distributed according to $n(\mathbf{x})$ and is randomized by rejection sampling, knowing that there is a maximal distance a WD can have to be included in our sample (observational errors included). A randomly drawn object is then assigned observable quantities, with errors as described in Sec.~\ref{sec:data}. If the object observables fulfill the selection cuts, the object is included in the sample; if not, it is rejected.
 
-In this article, we construct a sample with 10,000 WDs. The distribution of true object parameter values is visible in Fig. \ref{fig:10000WDs}, where selection effects are manifest. The maximum distance is clearly seen as a function of temperature, where hotter objects are seen further away. Due to the colour cut, the high temperature tail is more pronounced for the DB sub--population. It is also clear that low mass WDs are more likely to be included as they are more luminous, giving rise to some asymmetry in the distribution of surface gravity. The hottest object in this sample has an effective temperature of $\Teff=39,060$ K and is of DB class. The most distant object is located at 1.56 kpc, is of DA classification and has an effective temperature $\Teff=37,287$ K surface gravity $\logg=7.72$.
+In this article, we construct a sample with 10,000 WDs. The distribution of true object parameter values is visible in Fig. \ref{fig:10000WDs}, where selection effects are manifest. The maximum distance is clearly seen as a function of temperature, where hotter objects are seen further away. Due to the colour cut, the high temperature tail is more pronounced for the DB sub-population. It is also clear that low mass WDs are more likely to be included as they are more luminous, giving rise to some asymmetry in the distribution of surface gravity. The hottest object in this sample has an effective temperature of $\Teff=39,060$ K and is of DB class. The most distant object is located at 1.56 kpc, is of DA classification and has an effective temperature $\Teff=37,287$ K surface gravity $\logg=7.72$.
 
 \begin{figure*}
 	\includegraphics[width=.9\textwidth]{10000WDs.pdf}
@@ -400,9 +403,9 @@ In this article, we construct a sample with 10,000 WDs. The distribution of true
 
 \subsection{Results}
 
-We infer the population parameters of a Bayesian hierarchical model, as described in Section~\ref{sec:model}, for our mock data sample, using a Monte--Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm called Metropolis--within--Gibbs, in which the population parameters and the object parameters are varied separately, producing a computationally efficient marginalization of the object parameters \citep{BayesianDataAnalysis}. When varying the population parameters ($\popp$), all object parameters are fixed. All objects are modelled as independently drawn from the population model, so object parameters ($\objp_i$) are varied one object at a time. The WD classification type ($t$), which is a discrete variable, alternates at random for each attempted step of the object parameter Metropolis MCMC. For all other variables, which are continuous, the step is drawn at random from a multivariate Gaussian distribution. The covariance matrices of these multivariate Gaussians, for the population parameters and each of the 10,000 objects, are tuned in a thorough burn--in phase. For each iteration of the algorithm, the algorithm attempts 40 steps in population parameter space, and 40 steps in the parameter space of each separate object.
+We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm called Metropolis-within-Gibbs, in which the population parameters and the object parameters are varied separately, producing a computationally efficient marginalization of the object parameters \citep{BayesianDataAnalysis}. When varying the population parameters ($\popp$), all object parameters are fixed. All objects are modelled as independently drawn from the population model, so object parameters ($\objp_i$) are varied one object at a time. The WD classification type ($t$), which is a discrete variable, alternates at random for each attempted step of the object parameter Metropolis MCMC. For all other variables, which are continuous, the step is drawn at random from a multivariate Gaussian distribution. The covariance matrices of these multivariate Gaussians, for the population parameters and each of the 10,000 objects, are tuned in a thorough burn-in phase. For each iteration of the algorithm, the algorithm attempts 40 steps in population parameter space, and 40 steps in the parameter space of each separate object.
 
-The inferred posterior distributions are visible in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information. In each of these chains, the Metropolis--within--Gibbs MCMC has run for 10,000 iterations.
+The inferred posterior distributions are visible in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information. In each of these chains, the Metropolis-within-Gibbs MCMC has run for 10,000 iterations.
 
 \begin{figure*}
 	\includegraphics[width=1.\textwidth]{toy_chain.pdf}
@@ -416,7 +419,7 @@ The inferred posterior distributions are visible in Fig. \ref{fig:chain} and \re
     \label{fig:chain_parallax}
 \end{figure*}
 
-In both cases, with and without parallax information, the correct population parameter values are inferred to within statistical error. The inference on quantities $\alpha$ (parameterising the distribution of effective temperature) and $f_\text{DB}$ (the fraction of DB WDs) is not much affected by also including parallax information. For the remaining parameters, $\bar{g}$, $\sigma_g$, and $\gamma_g$ (parameterising the distribution of surface gravity), the inference is strongly affected and improved when including parallax information. The uncertainty is roughly halved for all three quantities. There is a clear degeneracy between $\sigma_g$ and $\gamma_g$, following the relation where the total variance on the surface gravity, $\text{Var}(\logg) = \sigma_g^2\gamma_g^2$, is preserved.
+In both cases, with and without parallax information, the correct population parameter values are inferred to within statistical error. The inference on quantities $\alpha$ (parametrizing the distribution of effective temperature) and $f_\text{DB}$ (the fraction of DB WDs) is not much affected by also including parallax information. For the remaining parameters, $\bar{g}$, $\sigma_g$, and $\gamma_g$ (parametrizing the distribution of surface gravity), the inference is strongly affected and improved when including parallax information. The uncertainty is roughly halved for all three quantities. There is a clear degeneracy between $\sigma_g$ and $\gamma_g$, following the relation where the total variance on the surface gravity, $\text{Var}(\logg) = \sigma_g^2\gamma_g^2$, is preserved.
 
 
 
@@ -426,9 +429,9 @@ In both cases, with and without parallax information, the correct population par
 
 \section{White dwarf subpopulations}\label{sec:subpopulations}
 
-The population of WDs in the Milky Way is richer and more complicated than the model described in Section~\ref{sec:model}. While we do consider WD sub--populations in the sense of accounting for the difference between DA and DB class WDs, there are other meaningful ways to compartmentalise the population model. While we assume that the distribution of temperatures and surface gravities is the same between DA and DB WDs, derived from the same population parameters, it could be meaningful to have separate sets of population parameters for the two classes.
+The population of WDs in the Milky Way is richer and more complicated than the model described in Sec.~\ref{sec:model}. While we do consider WD sub-populations in the sense of accounting for the difference between DA and DB class WDs, there are other meaningful ways to compartmentalise the population model. While we assume that the distribution of temperatures and surface gravities is the same between DA and DB WDs, derived from the same population parameters, it could be meaningful to have separate sets of population parameters for the two classes.
 
-In the same vein, one would expect the disk and halo WD population to have different properties. Furthermore, there is expected to be a sub--population of binary WD systems. These two different aspects of sub--populations are discussed below.
+In the same vein, one would expect the disk and halo WD population to have different properties. Furthermore, there is expected to be a sub-population of binary WD systems. These two different aspects of sub-populations are discussed below.
 
 
 
@@ -436,14 +439,14 @@ In the same vein, one would expect the disk and halo WD population to have diffe
 
 It would be interesting to see qualitative differences between disk and halo WDs. For example, the kinematically warmer halo population has older stars and would therefore be colder. The population of very old WDs is scientifically interesting, as it holds information about the distant star formation and dynamical history of the Milky Way.
 
-In this population model, each sub--population would have its own set of population parameters: $\popp = \{ \popp_\text{disk},\popp_\text{halo} \}$. They would each have their respective spatial number density distributions: $n_\text{disk}(\mathbf{x})$ and $n_\text{halo}(\mathbf{x})$. It would be necessary to have a population parameter that describes the relative number density fraction between the two sub--populations at some reference point (for example the Sun's position). The posterior, analogous to Eq.~\eqref{eq:fullposterior} would read
+In this population model, each sub-population would have its own set of population parameters: $\popp = \{ \popp_\text{disk},\popp_\text{halo} \}$. They would each have their respective spatial number density distributions: $n_\text{disk}(\mathbf{x})$ and $n_\text{halo}(\mathbf{x})$. It would be necessary to have a population parameter that describes the relative number density fraction between the two sub-populations at some reference point (for example the Sun's position). The posterior, analogous to Eq.~\eqref{eq:fullposterior} would read
 \begin{equation}\label{eq:posterior_disk_halo}
 \begin{split}
 	\pr(\popp,\objp | \data ) = \\ \pr(\popp)
 	\prod_i \frac{S(\data_i) \pr(\data_i | \objp_i) \Big[ \pr(\objp_i | \popp_\text{disk})+\pr(\objp_i | \popp_\text{halo}) \Big]}{\bar{N}(S,\popp_\text{disk},\popp_\text{halo})}.
 \end{split}
 \end{equation}
-The total number count is simply the sum over the two sub--populations, like
+The total number count is simply the sum over the two sub-populations, like
 \begin{equation}
 	\bar{N}(S,\popp_\text{disk},\popp_\text{halo})=\bar{N}_\text{disk}(S,\popp_\text{disk})+\bar{N}_\text{halo}(S,\popp_\text{halo}),
 \end{equation}
@@ -456,7 +459,7 @@ where the relative number density fraction would be accounted for (included in $
 
 \subsection{Binary population}
 
-Binary WD systems can be identified using only photometry and astrometry, in a similar way as what was used in \cite{2018ApJ...857..114W}. For a binary system, the likelihood is the same as is written in equation \eqref{eq:likelihood}, the difference being that the \emph{ugriz} apparent luminosities of the two component stars are added together, according to
+Binary WD systems can be identified using only photometry and astrometry, in a similar way as what was used in \cite{2018ApJ...857..114W}. For a binary system, the likelihood is the same as is written in Eq.~\eqref{eq:likelihood}, the difference being that the \emph{ugriz} apparent luminosities of the two component stars are added together, according to
 \begin{equation}
 	m_\text{sum} = - \frac{5}{2}\log_{10}\left( 10^{-\frac{2}{5}m_{A}}+10^{-\frac{2}{5}m_{B}}  \right),
 \end{equation}
@@ -464,7 +467,7 @@ where $m_A$ and $m_B$ are the apparent magnitudes of the two component stars, in
 
 The posterior density of a binary system will be written in terms of 7 parameters instead of 4, as we have temperature, surface gravity, and type of the two component stars, and the distance of the system.
 
-We construct a population of mock binaries by random pairing of the singles population and the same selection criteria, although we also add a constraint in terms of cooling time of the two component stars. In addition to the effective temperature and surface gravity distributions of the two component stars, as described by equation \eqref{eq:T&g}, the probability of pairing also has a factor
+We construct a population of mock binaries by random pairing of the singles population and the same selection criteria, although we also add a constraint in terms of cooling time of the two component stars. In addition to the effective temperature and surface gravity distributions of the two component stars, as described by Eq.~\eqref{eq:T&g}, the probability of pairing also has a factor
 \begin{equation}\label{eq:time_difference}
 	\exp\left(
 	-\frac{[t_\text{cool}(\Teff_A,\logg_A,t_A)-t_\text{cool}(\Teff_B,\logg_B,t_B)]^2}{2\times ( 500~\text{Myrs})^2}
@@ -489,13 +492,13 @@ This identification is made on mock data when the underlying population model is
 
 \section{Discussion}\label{sec:discussion}
 
-In this article, we demonstrate how to infer properties of the local WD population using only astrometric and photometric information, in the framework of a Bayesian hierarchical model. We generate a mock data set with SDSS \emph{ugriz} photometry and Gaia parallax information, and are able to retrieve the population parameters used to generate that sample.
+In this article, we demonstrate how to infer properties of the local WD population using only astrometric and photometric information, in the framework of a Bayesian hierarchical model. We generate a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} parallax information, and are able to retrieve the population parameters used to generate that sample.
 
-In our mock data set, we have limited ourselves to a total number of 10,000 WDs. The catalogue of WD in a Gaia and SDSS cross--match is expected to be around an order of magnitude larger, enabling us to fit a more complicated model. The model could be extended with more complicated distributions of effective temperature and surface gravity, and by including sub--populations as discussed in Section~\ref{sec:subpopulations}.
+In our mock data set, we have limited ourselves to a total number of 10,000 WDs. The catalogue of WD in a \emph{Gaia} and SDSS cross-match is expected to be around an order of magnitude larger, enabling us to fit a more complicated model. The model could be extended with more complicated distributions of effective temperature and surface gravity, and by including sub-populations as discussed in Sec.~\ref{sec:subpopulations}.
 
-When working with actual data, there are complications that are not included here but would be straight forward to implement in this framework. In terms of dust, most WD seen by Gaia and SDSS are very close and almost unaffected. However, hotter and more luminous WDs are seen to further distance and subject to dust reddening and extinction. With a good dust map, selection effects and photometric reddening for such objects can be accounted for. Also not included in this article are incompleteness effects, which are severe for WDs in Gaia DR2. This will get significantly better with future data releases, but will still be crucial to account for. As formulated in Section~\ref{sec:sample_cuts}, the selection function of this article only contains selection effects coming from the sample cuts; any incompleteness effects can be easily added as a factor to the selection function, dependent on data and/or intrinsic WD properties. The inference on both object and population parameters can be biased if the stellar models are inaccurate. In such a case, a similar framework can be used to infer data--driven corrections to these models.
+When working with actual data, there are complications that are not included here but would be straight forward to implement in this framework. In terms of dust, most WD seen by \emph{Gaia} and SDSS are very close and almost unaffected. However, hotter and more luminous WDs are seen to further distance and subject to dust reddening and extinction. With a good dust map, selection effects and photometric reddening for such objects can be accounted for. Also not included in this article are incompleteness effects, which are severe for WDs in \emph{Gaia} DR2. This will get significantly better with future data releases, but will still be crucial to account for. As formulated in Sec.~\ref{sec:sample_cuts}, the selection function of this article only contains selection effects coming from the sample cuts; any incompleteness effects can be easily added as a factor to the selection function, dependent on data and/or intrinsic WD properties. The inference on both object and population parameters can be biased if the stellar models are inaccurate. In such a case, a similar framework can be used to infer data-driven corrections to these models.
 
-Gaia parallax measurements provides very robust identification of WDs, enables the construction of volume limited samples, and breaks the degeneracy between distance and size. It is possible to differentiate sub--populations of WDs using this method, perhaps even inferring a population of binary WD systems. The uncertainty in inferring the properties of any single object is typically large, and it is absolutely essential to use a statistical model which fully and correctly accounts for such uncertainties. In this article, we have demonstrated how to do so in a framework of a Bayesian hierarchical model. In the near future, we plan to use this method to infer properties of the WD population of the Milky Way, using data from Gaia, SDSS and potentially other photometric surveys.
+\emph{Gaia} parallax measurements provides very robust identification of WDs, enables the construction of volume limited samples, and breaks the degeneracy between distance and size. It is possible to differentiate sub-populations of WDs using this method, perhaps even inferring a population of binary WD systems. The uncertainty in inferring the properties of any single object is typically large, and it is absolutely essential to use a statistical model which fully and correctly accounts for such uncertainties. In this article, we have demonstrated how to do so in a framework of a Bayesian hierarchical model. In the near future, we plan to use this method to infer properties of the WD population of the Milky Way, using data from \emph{Gaia}, SDSS and potentially other photometric surveys.
 
 
 
