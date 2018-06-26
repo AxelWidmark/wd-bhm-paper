@@ -109,7 +109,7 @@ $^4$Department of Physics and Astronomy, University College London, Gower Street
 \begin{abstract}
 The \emph{Gaia} mission will provide precise astrometry for an unprecedented number of white dwarfs. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
 Our technique utilises a Bayesian hierarchical model for inferring properties of a white dwarf population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference, leading to more robust conclusions which are less sensitive to systematic errors.
-\aw{Should I delete this sentence then?} This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
+\aw{Should I delete the following sentence then?} This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -132,7 +132,7 @@ white dwarfs -- stars: statistics -- astrometry
 
 White dwarfs (WDs) are the remnants of all light-to-intermediate mass stars \citep{1996ApJ...460..489R}. The local WD population carries information about the Galaxy's star formation history and dynamical history and constrain models of stellar evolution \citep{1987ApJ...315L..77W,2016NewAR..72....1G,2018arXiv180505849E}. WDs are known to be Type 1a thermonuclear supernovae progenitors, although the explosion mechanism is poorly understood \citep{Livio:2018rue}.
 
-The Sloan Digital Sky Survey (SDSS) catalogues a total number of $\sim 29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that they have no fixed mass or size, such that their observational properties are largely degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this can be sensitive to systematic errors. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by something like an order of magnitude \citep{2014A&A...565A..11C,Jordan:2006jg}. \emph{Gaia} will also provide astrometric information for local neighborhood WDs, which previous astrometric missions were unable to do. \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as dim as $G \sim 21$.
+The Sloan Digital Sky Survey (SDSS) catalogues a total number of $\sim 29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that they have no fixed mass or size, such that their observational properties are largely degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this can be sensitive to systematic errors. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by approximately an order of magnitude \citep{2014A&A...565A..11C,Jordan:2006jg}. \emph{Gaia} will also provide astrometric information for local neighborhood WDs, which previous astrometric missions were unable to do. \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as dim as $G \sim 21$.
 
 With the enormous size of the \emph{Gaia} data set, there is great potential in an approach that focuses on width rather than depth, by taking less detailed information into account but including a very large number of objects. In this article we demonstrate how to infer properties of the WD population in the solar neighborhood, using SDSS \emph{ugriz} photometry and \emph{Gaia} astrometry. We generate a mock data sample of WDs from a population model of temperature, surface gravity and spatial number density distributions. All sample objects has photometry and parallax information with observational errors expected from SDSS and \emph{Gaia}, and sample construction selection effects are taken into account.
 
@@ -298,7 +298,7 @@ A directed acyclical graph (DAG) of our statistical model is shown in Fig.~\ref{
 
 Each WD has a set of object parameters encapsulated in $\objp_i$, as listed in Table \ref{tab:parameters}. It consists of the effective temperature $\Teff$, the surface gravity $\logg$, the type $t$ denoting DA or DB classification, and $\Delta$ which parametrizes the distance.
 
-Conceptually, the most straightforward parametrization would be to have the distance $d$ as the fourth object parameter. However, this creates some sampling difficulties arising from the fact that $\logg$ and $d$ are highly degenerate. This is problematic especially when there is no parallax information that constrains the distance, as illustrated in Fig.~\ref{fig:banana}. Therefore the distance is parametrized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the colour factor of the likelihood function,
+Conceptually, the most straightforward parametrization would be to have the distance $d$ as the fourth object parameter. However, this creates some sampling difficulties arising from the fact that $\logg$ and $d$ are highly degenerate, especially when there is no parallax information that constrains the distance. In this work, we sample the object parameter posteriors using a Metropolis-Hastings Monte-Carlo Markov Chain \citep{1953JChPh..21.1087M,2018ApJS..236...11H}, which is more efficient when the posterior closer to a multivariate Gaussian in shape. This can be accomplished by a coordinate transformation, as is illustrated in Fig.~\ref{fig:banana}. In the upper panel, the distance is parametrized in terms of $\Delta$, which is the relative change to the ideal distance given $\Teff$ and $\logg$. Let $\tilde{d}(\Teff,\logg)$ be the distance that maximizes the colour factor of the likelihood function,
 \begin{equation}
 	\tilde{d} = 
     h^{-1}\left( \frac{\sum_b \sigma_b^{-2} (\hat{m}_c-M_c(\Teff,\logg))}{\sum_b \sigma_b^{-2}} \right),
@@ -307,7 +307,7 @@ where $h^{-1}$ is the inverse of $h(d)=5[\log_{10}(d/\text{pc})-1]$, the differe
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{banana.pdf}
-    \caption{A posterior density of an object with true parameters $\Teff=14000$ K, $\logg=7.9$, $t=\text{DA}$, and $d=50$ pc, with photometric errors of $\sigma_c=0.01$ in all \emph{ugriz} colour bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0$. Because the photometric errors are somewhat large, the constraint to the surface gravity is mostly due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parametrization. This illustrates the degeneracy between surface gravity $\logg$ and distance $d$, which can be problematic for a Metropolis-Hastings algorithm to sample.}
+    \caption{A posterior density of an object with true parameters $\Teff=14000$ K, $\logg=7.9$, $t=\text{DA}$, and $d=50$ pc, with photometric errors of $\sigma_c=0.01$ in all \emph{ugriz} colour bands. The population parameters are set to $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0$. Because there is no parallax information, the constraint to the surface gravity is largely due to the prior set by the population model. The top panel shows the posterior density over $\logg$ and $\Delta$, while the bottom panel shows the same posterior in a $\logg$ and $d$ parametrization.}
     \label{fig:banana}
 \end{figure}
 
@@ -334,7 +334,7 @@ The normalization factor is given by an integral (or sum, in the case of a discr
 	\bar{N}(S,\popp) = \sum_{t} \int \de\Teff\, \de \logg\, \de^3\mathbf{x}\,
     \pr(\Teff,g,t | \popp)\, n(\mathbf{x})\, S(\Teff,\logg,t,\mathbf{x}).
 \end{equation}
-The probability of being selected is the probability of being included in the sample, given by an object's intrinsic properties and the sample construction cuts on observables. This is formulated in  the next section.
+The probability of being selected, $S(\Teff,\logg,t,\mathbf{x})$, is the probability of being included in the sample, given by an object's intrinsic properties and the sample construction cuts on observables. This is formulated in  the next section.
 
 
 
@@ -344,9 +344,11 @@ The probability of being selected is the probability of being included in the sa
 
 \section{Mock data and inference}\label{sec:mock}
 
-To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0.1$, and the WD number density $n(\mathbf{x})$ as described in Sec.~\ref{sec:model}. \cite{2011ApJ...737...28B}
+To test the algorithm, mock data is generated from a population model, with population parameters $\alpha=3.5$, $\bar{g}=7.9$, $\sigma_g=0.1$, $\gamma_g=1.2$, and $f_\text{DB}=0.1$, and the WD number density $n(\mathbf{x})$ as described in Sec.~\ref{sec:model}.
 
-We compare the case of having no astrometric information, versus having parallax measurements with the precision expected from \emph{Gaia} DR2.
+While the exact values of these parameters are of lesser importance, as the main focus is to demonstrate the method, the chosen numerical values are motivated as follows. To first order, WDs cool at a rate of $\dot{\Teff} = \Teff^{-3.5}$, according to \cite{1952MNRAS.112..583M}. For cooler WDs, numerical models detract from this cooling rate. The surface gravity distribution mean and dispersion ($\bar{g}$ and $\sigma_g$) are well motivated, for example by \cite{2006ApJS..167...40E}. The tails of the surface gravity distribution are observed to be heavier than those of a Gaussian distribution, motivating a value $\gamma_g>1$. The fraction of DB WDs is observed to vary with temperature, roughly in the range of 10--20 per cent \citep{2011ApJ...737...28B}.
+
+We compare the case of having no astrometric information, versus having parallax measurements with the precision of \emph{Gaia} DR2.
 
 \subsection{Sample cuts}\label{sec:sample_cuts}
 
@@ -403,7 +405,7 @@ In this article, we construct a sample with 10,000 WDs. The distribution of true
 
 \subsection{Results}
 
-We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm called Metropolis-within-Gibbs, in which the population parameters and the object parameters are varied separately, producing a computationally efficient marginalization of the object parameters \citep{BayesianDataAnalysis}. When varying the population parameters ($\popp$), all object parameters are fixed. All objects are modelled as independently drawn from the population model, so object parameters ($\objp_i$) are varied one object at a time. The WD classification type ($t$), which is a discrete variable, alternates at random for each attempted step of the object parameter Metropolis MCMC. For all other variables, which are continuous, the step is drawn at random from a multivariate Gaussian distribution. The covariance matrices of these multivariate Gaussians, for the population parameters and each of the 10,000 objects, are tuned in a thorough burn-in phase. For each iteration of the algorithm, the algorithm attempts 40 steps in population parameter space, and 40 steps in the parameter space of each separate object.
+We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm called Metropolis-within-Gibbs, in which the population parameters and the object parameters are varied separately, producing a computationally efficient marginalization of the object parameters \citep{BayesianDataAnalysis}. All objects are modelled as independently drawn from the population model, so object parameters ($\objp_i$) are varied one object at a time. The WD classification type ($t$), which is a discrete variable, alternates at random for each attempted step of the object parameter Metropolis MCMC. For all other variables, which are continuous, the step is drawn at random from a multivariate Gaussian distribution. The covariance matrices of these multivariate Gaussians, for the population parameters and each of the 10,000 objects, are tuned in a thorough burn-in phase. For each iteration of the algorithm, the algorithm attempts 40 steps in population parameter space, and 40 steps in the parameter space of each separate object.
 
 The inferred posterior distributions are visible in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information. In each of these chains, the Metropolis-within-Gibbs MCMC has run for 10,000 iterations.
 
@@ -504,8 +506,7 @@ When working with actual data, there are complications that are not included her
 
 \section*{Acknowledgements}
 
-\aw{Who should we thank here?}
-
+We would like to thank Pierre Bergeron, for providing WD atmospheric models also with Gaia photometry.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
