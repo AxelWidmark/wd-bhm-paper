@@ -108,8 +108,9 @@ $^4$Department of Physics and Astronomy, University College London, Gower Street
 % Abstract of the paper
 \begin{abstract}
 The \emph{Gaia} mission will provide precise astrometry for an unprecedented number of white dwarfs. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
-Our technique utilises a Bayesian hierarchical model for inferring properties of a white dwarf population while also taking into account all observational errors of individual stars. We demonstrate that astrometry significantly improves the statistical inference, leading to more robust conclusions which are less sensitive to systematic errors.
-\aw{Should I delete the following sentence then?} This is a powerful method for constraining stellar evolution, especially Type 1a supernovae progenitor scenarios, as well as the star formation and dynamical history of the Milky Way.
+Our technique utilises a Bayesian hierarchical model for inferring properties of a white dwarf population while also taking into account all observational errors of individual stars, as well as selection and incompleteness effects.
+A robust inference of the distribution of intrinsic properties of the white dwarf population is informative of stellar evolution, Type 1a supernovae progenitor scenarios, and the star formation and dynamical history of the Milky Way.
+We demonstrate that photometry alone is informative of the white dwarf population properties, and that astrometric information significantly improves the inference on the white dwarf surface gravity distribution. We also discuss the possibility of identifying unresolved binary white dwarfs using only photometric and astrometric information, and show that this is possible with accurate stellar models.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -138,7 +139,7 @@ With the enormous size of the \emph{Gaia} data set, there is great potential in 
 
 In a WD population model, it is physically meaningful to divide the total population into WD sub-populations. White dwarfs form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen or helium dominated \citep{Tremblay:2007hq,2011ApJ...737...28B,2015A&A...583A..86K}. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. We also discuss how to expand the statistical model when considering other WD sub-populations, such as separate disk and halo WD populations \citep{1998ApJ...503..239I,2016MNRAS.463.2453D}. We also discuss the possibility of identifying binary WD systems \citep{2018MNRAS.476.2584M} and demonstrate how to do so using photometric and astrometric information alone.
 
-This paper is organized as follows. \aw{What should I write instead of 'In Sec...'?} In Sec.~\ref{sec:model} we outline our model for the WD population. In Sec.~\ref{sec:data} we describe the observational data that we consider. In Sec.~\ref{sec:method} we present out method of statistical inference. In Sec.~\ref{sec:mock} we generate a mock data catalogue and use our statistical method to infer the population model parameters from the data. In Sec.~\ref{sec:subpopulations} we discuss possible extensions to the WD model, such as differentiating between disk and halo subpopulations, as well the possibility of identifying double-degenerate binary WD systems. Finally, in Sec.~\ref{sec:discussion} we discuss and conclude.
+This paper is organized as follows. We outline our model for the WD population and the observational data that we consider, in Sec.~\ref{sec:model} and Sec.~\ref{sec:data} respectively. We present out method of statistical inference in Sec.~\ref{sec:method}.  followed by Sec.~\ref{sec:mock}, where we generate a mock data catalogue and infer the model parameters from that data. We discuss possible extensions to the WD model in Sec.~\ref{sec:subpopulations}, such as differentiating between disk and halo sub-populations, as well the possibility of identifying unresolved double-degenerate binary WD systems. Finally, in Sec.~\ref{sec:discussion} we discuss and conclude.
 
 
 
@@ -462,7 +463,7 @@ where the relative number density fraction would be accounted for (included in $
 
 \subsection{Binary population}
 
-Binary WD systems can be identified using only photometry and astrometry, in a similar way as what was used in \cite{2018ApJ...857..114W}. For a binary system, the likelihood is the same as is written in Eq.~\eqref{eq:likelihood}, the difference being that the \emph{ugriz} apparent luminosities of the two component stars are added together, according to
+Unresolved binary WD systems can be identified using only photometry and astrometry, in a similar way as what was used in \cite{2018ApJ...857..114W}. For a binary system, the likelihood is the same as is written in Eq.~\eqref{eq:likelihood}, the difference being that the \emph{ugriz} apparent luminosities of the two component stars are added together, according to
 \begin{equation}
 	m_\text{sum} = - \frac{5}{2}\log_{10}\left( 10^{-\frac{2}{5}m_{A}}+10^{-\frac{2}{5}m_{B}}  \right),
 \end{equation}
