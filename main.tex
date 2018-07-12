@@ -109,9 +109,8 @@ $^5$Department of Physics and Astronomy, University College London, Gower Street
 
 % Abstract of the paper
 \begin{abstract}
-The \emph{Gaia} mission will provide precise astrometry for an unprecedented number of white dwarfs. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
+The \emph{Gaia} mission will provide precise astrometry for an unprecedented number of white dwarfs, \changes{holding information on stellar evolution, Type Ia supernovae progenitor scenarios, and the star formation and dynamical history of the Milky Way}. With such a large data set, it is possible to infer properties of the white dwarf population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
 Our technique utilises a Bayesian hierarchical model for inferring properties of a white dwarf population while also taking into account all observational errors of individual stars, as well as selection and incompleteness effects.
-A robust \changes{determination} of the distribution of intrinsic properties of the white dwarf population is informative of stellar evolution, Type Ia supernovae progenitor scenarios, and the star formation and dynamical history of the Milky Way.
 We demonstrate that photometry alone \changes{can constrain the white dwarf population's  distributions of temperature, surface gravity and phenomenological type}, and that astrometric information significantly improves \changes{determination} of the white dwarf surface gravity distribution. We also discuss the possibility of identifying unresolved binary white dwarfs using only photometric and astrometric information.
 \end{abstract}
 
@@ -135,7 +134,7 @@ white dwarfs -- stars: statistics -- astrometry
 
 White dwarfs (WDs) are the remnants of stars with initial masses $\lesssim8\mbox{--}10$~M$_\odot$ \citep{1996ApJ...460..489R,2009MNRAS.395.1409S}. The local WD population carries information about the Galaxy's star formation and dynamical history, and constrains models of stellar evolution \citep{1987ApJ...315L..77W,2016NewAR..72....1G,2018arXiv180505849E}.
 
-The Sloan Digital Sky Survey (SDSS) catalogued ${\sim}29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that their mass is degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models, although this can be sensitive to systematic errors. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by approximately an order of magnitude \citep{Jordan:2006jg,2014A&A...565A..11C}. \emph{Gaia} also provides astrometric information for local neighborhood WDs. For comparison, the astrometric mission \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as \changes{faint} as $G \sim 21$ (with this limit, a WD with a mass of 0.6 M$_\odot$ and effective temperature of 8,000 K is seen to ${\sim}400$ pc, assuming no dust extinction).
+The Sloan Digital Sky Survey (SDSS) catalogued ${\sim}29,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K}. A fundamental difficulty in studying WDs is that their mass is degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by approximately an order of magnitude \citep{Jordan:2006jg,2014A&A...565A..11C}\changes{; \cite{2018MNRAS.tmp.1537K} and \cite{2018arXiv180703315G} have recently published WD catalogues, the latter containing 260,000 high-confidence WDs}. \emph{Gaia} also provides astrometric information for local neighborhood WDs. For comparison, the astrometric mission \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as \changes{faint} as $G \sim 21$ (with this limit, a WD with a mass of 0.6 M$_\odot$ and effective temperature of 8,000 K is seen to ${\sim}400$ pc, assuming no dust extinction).
 
 In a model of the WD population, it is physically meaningful to divide the total population into WD sub-populations. \changes{WDs} form a family of phenomenological types, where the main classification is between DA and DB, depending on if the envelope is hydrogen- or helium-dominated \citep{Tremblay:2007hq,2011ApJ...737...28B,2015A&A...583A..86K}. DA and DB stars can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}. The halo WD population is kinematically warmer and older than the disk WD population, such that inferring and comparing properties of these sub-populations can \changes{yield information on} the star formation and kinematic history of our Galaxy \citep{1998ApJ...503..239I,2016MNRAS.463.2453D}. The sub-population of binary WD systems holds information about stellar evolution \citep{Webbink:2007ps} and Type Ia supernovae progenitor scenarios \citep{Livio:2018rue}, but unresolved binaries are very difficult to identify even with high-quality spectroscopy.
 
@@ -392,7 +391,7 @@ Without measurement errors, this cut corresponds to limiting the temperature of 
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{colors_cut.pdf}
-    \caption{Colours of a DA (blue grid) and DB (red grid) WD, \changes{in contours} of constant $\Teff$ or $\logg$. The surface gravity takes values $\logg = \{7,7.5,8,8.5,9\}$. The black dashed lines corresponds to the colour cuts in $\hat{\delta}_{ugr}$, where only objects that fall in the region between these lines are included. Because this is a cut in observed colour, observational errors can scatter objects across the sample boundary.}
+    \caption{Colours of a DA and DB WD, \changes{in contours} of constant $\Teff$ or $\logg$. The surface gravity takes values $\logg = \{7,7.5,8,8.5,9\}$. The dashed lines corresponds to the colour cuts in $\hat{\delta}_{ugr}$, where only objects that fall in the region between these lines are included. Because this is a cut in observed colour, observational errors can scatter objects across the sample boundary.}
     \label{fig:colors_cut}
 \end{figure}
 
@@ -428,7 +427,7 @@ We construct a sample with 10,000 WDs. The distribution of true object parameter
 
 \begin{figure*}
 	\includegraphics[width=.9\textwidth]{10000WDs.pdf}
-    \caption{The distributions of true intrinsic properties of our mock data sample, represented as 1D and 2D histograms. The axis are shared between the panels, except for the vertical axis of the 1D histograms. In the 2D histograms, there is no differentiation between DA and DB WDs. In the 1D histograms, the distribution of DA WDs are shown in blue, and DB WDs are shown in red.}
+    \caption{The distributions of true intrinsic properties of our mock data sample, represented as 1D and 2D histograms. The axis are shared between the panels, except for the vertical axis of the 1D histograms. \changes{DA and DB WDs are plotted separately in the 1D histograms, but not in the 2D histograms.}}
     \label{fig:10000WDs}
 \end{figure*}
 
@@ -448,11 +447,65 @@ The inferred posterior distributions are shown in Fig. \ref{fig:chain} and \ref{
 
 \begin{figure*}
 	\includegraphics[width=1.\textwidth]{toy_chain_include-parallax.pdf}
-    \caption{ Posterior density of the population parameters, for a mock data set with parallax information. Above the upper panels, the median values are presented, plus/minus the 16th and 84th percentiles. The true population parameter values are marked with dotted black lines, and a white square \changes{in the 2D histograms}.}
+    \caption{ Posterior density of the population parameters, for a mock data set with parallax information. Above the upper panels, the median values are presented, plus/minus the 16th and 84th percentiles. The true population parameter values are marked with dotted black lines, and a white square \changes{in the 2D histograms. The axis range of all panels are the same as in Fig.~\ref{fig:chain}}}
     \label{fig:chain_parallax}
 \end{figure*}
 
 In both cases, with and without parallax information, the correct population parameter values are \changes{recovered} by the posterior distribution. The inference on quantities $\alpha$ (parametrizing the distribution of effective temperature) and $f_\text{DB}$ (the fraction of DB WDs) is not \changes{significantly affected by also adding} parallax information. For the remaining parameters, $\bar{g}$, $\sigma_g$, and $\gamma_g$ (parametrizing the distribution of surface gravity), the inference is strongly affected when including parallax information. The \changes{width of the posterior distribution} is roughly halved for all three quantities. There is a clear degeneracy between $\sigma_g$ and $\gamma_g$, following the relation where the total variance on the surface gravity, $\text{Var}(\logg) = \sigma_g^2\gamma_g^2$, is preserved.
+
+\changes{
+In Table~\ref{tab:posteriors}, we show the posterior median value and width for the population parameters of three mock data samples, the first one being the sample discussed above. It is clear that there is a spread around the true population parameter values, with no clear bias in the inference of the population parameters.
+}
+
+\begin{table*}
+	\centering
+	\caption{\changes{Posterior distributions of three different mock samples, presented in terms of the median value of each population parameter, plus/minus the 16th and 84th percentiles. The posteriors distribution of sample \textbf{A} is also shown in Fig.~\ref{fig:chain} and \ref{fig:chain_parallax}.}}
+	\label{tab:posteriors}
+    \begin{tabular}{l l l l l l}
+		\hline
+		Sample  & $\alpha$ & $\bar{g}$ & $\sigma_g$ & $\gamma_g$ & $f_\text{DB}$  \\
+		\hline
+		\textbf{A}, without parallax &
+			$3.511^{+0.025}_{-0.025}$ & 
+			$7.906^{+0.004}_{-0.004}$ & 
+			$0.110^{+0.008}_{-0.008}$ & 
+			$1.134^{+0.092}_{-0.071}$ & 
+			$0.1036^{+0.0035}_{-0.0034}$ \vspace{2pt} \\
+		\textbf{A}, with parallax &
+			$3.511^{+0.025}_{-0.025}$ &
+			$7.901^{+0.002}_{-0.002}$ & 
+			$0.098^{+0.003}_{-0.003}$ &
+			$1.242^{+0.046}_{-0.039}$ &
+			$0.1037^{+0.0035}_{-0.0034}$ \\
+		\hline
+		\textbf{B}, without parallax &
+			$3.500^{+0.000}_{-0.000}$ & 
+			$7.900^{+0.000}_{-0.000}$ & 
+			$0.100^{+0.000}_{-0.000}$ & 
+			$1.200^{+0.000}_{-0.000}$ & 
+			$0.1000^{+0.000}_{-0.000}$ \vspace{2pt} \\
+		\textbf{B}, with parallax &
+			$3.500^{+0.000}_{-0.000}$ & 
+			$7.900^{+0.000}_{-0.000}$ & 
+			$0.100^{+0.000}_{-0.000}$ & 
+			$1.200^{+0.000}_{-0.000}$ & 
+			$0.1000^{+0.000}_{-0.000}$ \\
+		\hline
+			\textbf{C}, without parallax &
+			$3.500^{+0.000}_{-0.000}$ & 
+			$7.900^{+0.000}_{-0.000}$ & 
+			$0.100^{+0.000}_{-0.000}$ & 
+			$1.200^{+0.000}_{-0.000}$ & 
+			$0.1000^{+0.000}_{-0.000}$ \vspace{2pt} \\
+		\textbf{C}, with parallax &
+			$3.500^{+0.000}_{-0.000}$ & 
+			$7.900^{+0.000}_{-0.000}$ & 
+			$0.100^{+0.000}_{-0.000}$ & 
+			$1.200^{+0.000}_{-0.000}$ & 
+			$0.1000^{+0.000}_{-0.000}$ \\
+		\hline
+	\end{tabular}
+\end{table*}
 
 
 
@@ -514,7 +567,7 @@ where $t_\text{cool}(\Teff_A,\logg_A,t_A)$ is the cooling time of the $A$ compon
 Figure \ref{fig:ROC_binaries} shows a receiver operating characteristic (ROC) curve for identification of binaries, for the cases of having and not having parallax information. The binaries are inferred with knowledge of the underlying population model, in the sense that the population parameters are known. The Bayesian evidence for being a single WD and being a binary WD is computed by sampling the posterior over the object parameters with an MCMC, and then approximating the integral by a first order multivariate Gaussian approximation, given by the covariance matrix and maximum posterior value MCMC chain. The integral is computed for all possible DA and DB combinations separately, with a $\Teff_A>\Teff_B$ multiplicity constraint for binary WDs, circumventing issues of multimodal posterior densities. This is done for 1000 mock data single WDs and 1000 mock data binary WD systems. It is clear from Fig.~\ref{fig:ROC_binaries} that binary identification is significantly \changes{improved} with parallax information, for which some binaries can be strongly identified even with a very low contamination rate \changes{(20 per cent binary identification with 0.1 per cent contamination)}.
 \begin{figure}
 	\includegraphics[width=\columnwidth]{ROC_binaries.pdf}
-    \caption{A receiver operating characteristic (ROC) curve of binary WD identification. This shows the rate of falsely identified versus correctly identified binary WD systems, for the cases of having and not having parallax information (solid red and solid blue, respectively). \changes{An object is labelled binary if the Bayes factor for being a binary system is above some threshold value, where this threshold value is monotonically decreasing along the graphs, from the bottom-left to the top-right corner of the figure.} The black dashed line shows the linear relationship.}
+    \caption{A receiver operating characteristic (ROC) curve of binary WD identification. This shows the rate of falsely identified versus correctly identified binary WD systems, for the cases of having and not having parallax information. \changes{An object is labelled binary if the Bayes factor for being a binary system is above some threshold value, where this threshold value is monotonically decreasing along the graphs, from the bottom-left to the top-right corner of the figure.} The dashed line shows the linear relationship.}
     \label{fig:ROC_binaries}
 \end{figure}
 
@@ -541,6 +594,8 @@ When working with \changes{real} data, there are complications that are not incl
 \section*{Acknowledgements}
 
 We would like to thank Pierre Bergeron, for providing WD atmospheric models with SDSS and \emph{Gaia} passband photometry.
+
+This work was performed in part at Aspen Center for Physics, which is supported by National Science Foundation grant PHY-1607611. This work was also partially supported by a grant from the Simons Foundation.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
