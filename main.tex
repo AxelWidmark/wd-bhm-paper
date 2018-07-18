@@ -433,6 +433,10 @@ We construct a sample with 10,000 WDs. The distribution of true object parameter
 
 We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm called Metropolis-within-Gibbs \citep{BayesianDataAnalysis}, in which the population parameters ($\popp$) and the object parameters of each individual WD ($\objp_i$) are varied separately, producing a computationally efficient marginalization of the object parameters. The WD classification type ($t$), which is a discrete variable, alternates at random for each attempted step of the object parameter Metropolis step. For all other variables, which are continuous, the step is drawn at random from a multivariate normal distribution. The covariance matrices of these multivariate Gaussians, one for the population parameters and one for each of the 10,000 objects, are tuned in a thorough burn-in phase. For each iteration of the algorithm, the algorithm attempts 40 steps in population parameter space, and 40 steps in the parameter space of each separate object.
 
+\changes{
+The population parameter prior, $\pr(\popp)$, is set to flat and wide in all parameters.
+}
+
 The inferred posterior distributions are shown in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information. In each of these chains, the Metropolis-within-Gibbs MCMC has run for 10,000 iterations.
 
 \begin{figure*}
