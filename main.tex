@@ -156,13 +156,13 @@ The distribution of effective temperature is parametrized as
 \begin{equation}\label{eq:T}
     \pr(\Teff | \popp) \propto \Theta(\Teff - \Teff_\text{min})\, \Theta(\Teff_\text{max} - \Teff) \, \exp (-\alpha \Teff),
 \end{equation}
-where $\Theta$ is the Heaviside step function, and $\Teff_\text{min}=1500$~K and $\Teff_\text{max}=120$,000~K the lower and upper bounds to the effective temperature.
+where $\Theta$ is the Heaviside step function, and $\Teff_\text{min}=1500$~K and $\Teff_\text{max}=120$,000~K the lower and upper bounds on the effective temperature.
 
 The distribution of surface gravity is parametrized by
 \begin{equation}\label{eq:T&g}
     \pr(\logg | \popp) \propto \Theta(\logg - \logg_\text{min}) \, \Theta(\logg_\text{max} - \logg) \, f_t(\logg|\bar{g},\sigma_g,\gamma_g),\\
 \end{equation}
-where $\logg_\text{min}=7$ and $\logg_\text{max}=9$ are the lower and upper bounds to the surface gravity, and $f_t(\logg)$ is Student's $t$-distribution of width $\sigma_g$ and variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$, such that the quantity $\gamma_g$ characterizes the heaviness of the distribution's tails.
+where $\logg_\text{min}=7$ and $\logg_\text{max}=9$ are the lower and upper bounds on the surface gravity, and $f_t(\logg)$ is Student's $t$-distribution of width $\sigma_g$ and variance $\text{Var}(g) = \gamma_g^2 \sigma_g^2$, such that the quantity $\gamma_g$ characterizes the heaviness of the distribution's tails.
 \footnote{
 Student's $t$-distribution is defined
 \begin{equation}
@@ -442,13 +442,13 @@ The inferred posterior distributions are shown in Fig. \ref{fig:chain} and \ref{
 
 \begin{figure*}
 	\includegraphics[width=1.\textwidth]{toy_chain.pdf}
-    \caption{ Posterior density of the population parameters, for a mock data set with no astrometric information. The highest posterior density (HPD) credible interval, presented in terms of the HPD value plus/minus bounds that cover 68 per cent of the posterior density, are indicated. The true population parameter values are marked with dotted black lines, and a white square in the 2D histograms.}
+    \caption{ Posterior density of the population parameters, for a mock data set with no astrometric information. The highest posterior density (HPD) credible interval, presented in terms of the HPD value plus/minus bounds that cover 68 per cent of the posterior density, are indicated in the captions and by grey shaded areas beneath the graphs of the 1D histograms. The true population parameter values are marked with dotted black lines, and a white square in the 2D histograms.}
     \label{fig:chain}
 \end{figure*}
 
 \begin{figure*}
 	\includegraphics[width=1.\textwidth]{toy_chain_include-parallax.pdf}
-    \caption{ Posterior density of the population parameters, for a mock data set with parallax information. The highest posterior density (HPD) credible interval, presented in terms of the HPD value plus/minus bounds that cover 68 per cent of the posterior density, are indicated. The true population parameter values are marked with dotted black lines, and a white square in the 2D histograms. The axis range of all panels are the same as in Fig.~\ref{fig:chain}.}
+    \caption{ Posterior density of the population parameters, for a mock data set with parallax information. The highest posterior density (HPD) credible interval, presented in terms of the HPD value plus/minus bounds that cover 68 per cent of the posterior density, are indicated in the captions and by grey shaded areas beneath the graphs of the 1D histograms. The true population parameter values are marked with dotted black lines, and a white square in the 2D histograms. The axis range of all panels are the same as in Fig.~\ref{fig:chain}.}
     \label{fig:chain_parallax}
 \end{figure*}
 
