@@ -111,7 +111,7 @@ $^5$Department of Physics and Astronomy, University College London, Gower Street
 \begin{abstract}
 The \emph{Gaia} mission \changes{is providing} precise astrometry for an unprecedented number of white dwarfs (WDs), encoding information on stellar evolution, Type Ia supernovae progenitor scenarios, and the star formation and dynamical history of the Milky Way. With such a large data set, it is possible to infer properties of the WD population using only astrometric and photometric information. We demonstrate a framework to accomplish this using a mock data set with SDSS \emph{ugriz} photometry and \emph{Gaia} astrometric information.
 Our technique utilises a Bayesian hierarchical model for inferring properties of a WD population while also taking into account all observational errors of individual objects, as well as selection and incompleteness effects.
-We demonstrate that photometry alone can constrain the WD population's  distributions of temperature, surface gravity and phenomenological type, and that astrometric information significantly improves determination of the WD surface gravity distribution. We also discuss the possibility of identifying unresolved binary WDs using only photometric and astrometric information.
+We demonstrate that photometry alone can constrain the WD population's  distributions of temperature, surface gravity and \changes{atmospheric composition}, and that astrometric information significantly improves determination of the WD surface gravity distribution. We also discuss the possibility of identifying unresolved binary WDs using only photometric and astrometric information.
 \end{abstract}
 
 % Select between one and six entries from the list of approved keywords.
@@ -135,9 +135,9 @@ white dwarfs -- stars: statistics -- astrometry
 White dwarfs (WDs) are the remnants of stars with initial masses $\lesssim8\mbox{--}10$~M$_\odot$ \citep{1996ApJ...460..489R,2009MNRAS.395.1409S}. The local WD population carries information about the Galaxy's star formation and dynamical history, and constrains models of stellar evolution \citep{1987ApJ...315L..77W,2016NewAR..72....1G,2018arXiv180505849E}.
 
 
-\changes{There are roughly $35,000$ spectroscopically confirmed WDs, observed by the Sloan Digital Sky Survey (SDSS) \citep{2013ApJS..204....5K,2015MNRAS.446.4078K,2016MNRAS.455.3413K}.} A fundamental difficulty in studying WDs is that their mass is degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by approximately an order of magnitude \citep{Jordan:2006jg,2014A&A...565A..11C}; \cite{2018arXiv180702559J} and \cite{2018arXiv180703315G} have recently published WD catalogues, the latter containing 260,000 high-confidence WDs. \emph{Gaia} also provides astrometric information for local neighborhood WDs \citep{2018MNRAS.479L.113K,2018MNRAS.480.3942H}. For comparison, the astrometric mission \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as faint as $G \sim 21$ (with this limit, a WD with a mass of 0.6 M$_\odot$ and effective temperature of 8,000 K is seen to ${\sim}400$ pc, assuming no dust extinction).
+\changes{The Sloan Digital Sky Survey (SDSS) have observed roughly $35,000$ spectroscopically confirmed WDs \citep{2013ApJS..204....5K,2015MNRAS.446.4078K,2016MNRAS.455.3413K}.} A fundamental difficulty in studying WDs is that their mass is degenerate with distance. This degeneracy can be broken with high quality spectrometry and accurate atmospheric models. The \emph{Gaia} mission, which recently published its second data release (DR2), is expected to increase the number of known WDs by approximately an order of magnitude \citep{Jordan:2006jg,2014A&A...565A..11C}; \cite{2018arXiv180702559J} and \cite{2018arXiv180703315G} have recently published WD catalogues, the latter containing 260,000 high-confidence WDs. \emph{Gaia} also provides astrometric information for local neighborhood WDs \citep{2018MNRAS.479L.113K,2018MNRAS.480.3942H}. For comparison, the astrometric mission \emph{Hipparcos} had a limiting apparent magnitude of $V \sim 12.4$ \citep{1997A&A...323L..49P}, while \emph{Gaia} will see objects as faint as $G \sim 21$ (with this limit, a WD with a mass of 0.6 M$_\odot$ and effective temperature of 8,000 K is seen to ${\sim}400$ pc, assuming no dust extinction).
 
-In a model of the WD population, it is physically meaningful to divide the total population into WD sub-populations. \changes{WDs form a family of phenomenological types that can be classified spectroscopically. In terms of photometry, the main classification is between hydrogen or helium dominated atmospheric envelopes \citep{Tremblay:2007hq,2011ApJ...737...28B,2015A&A...583A..86K}. Hydrogen and helium dominated WDs follow different colour tracks and can be identified with accurate photometry, as demonstrated by \cite{Mortlock:2008gf}.} The halo WD population is kinematically warmer and older than the disk WD population, such that inferring and comparing properties of these sub-populations can yield information on the star formation and kinematic history of our Galaxy \citep{1998ApJ...503..239I,2016MNRAS.463.2453D}. The sub-population of binary WD systems holds information about stellar evolution \citep{Postnov:2014tza} and Type Ia supernovae progenitor scenarios \citep{Livio:2018rue}, but unresolved binaries are very difficult to identify even with high-quality spectroscopy. \changes{The formation of WDs in binary systems also gives rise to a multi-component WD mass distribution; merging WD binaries can produce heavy WDs, while common envelope evolution of close binaries can give rise to very low mass WDs \citep{2013ApJS..204....5K}.}
+In a model of the WD population, it is physically meaningful to divide the total population into WD sub-populations. \changes{WDs exhibit a range of phenomenological types that can be classified spectroscopically. In terms of photometry, the main classification is between hydrogen or helium dominated atmospheric envelopes \citep{Tremblay:2007hq,2011ApJ...737...28B,2015A&A...583A..86K}. Hydrogen and helium dominated WDs follow different colour tracks and can be identified with accurate photometry, as demonstrated by \cite{Harris:2005gd,2006AJ....131..582K,Mortlock:2008gf}.} The halo WD population is kinematically warmer and older than the disk WD population, such that inferring and comparing properties of these sub-populations can yield information on the star formation and kinematic history of our Galaxy \citep{1998ApJ...503..239I,2016MNRAS.463.2453D}. The sub-population of binary WD systems holds information about stellar evolution \citep{Postnov:2014tza} and Type Ia supernovae progenitor scenarios \citep{Livio:2018rue}, but unresolved binaries are very difficult to identify even with high-quality spectroscopy. \changes{The formation of WDs in binary systems also gives rise to a multi-component WD mass distribution; merging WD binaries can produce heavy WDs, while common envelope evolution of close binaries can give rise to very low mass WDs \citep{2013ApJS..204....5K}.}
 
 With the enormous size of the \emph{Gaia} data set, there is great potential for inferring properties of the WD population using photometry and astrometry, rather than the smaller data set of spectroscopically observed WDs. In this work we demonstrate how to infer properties of the WD population in the solar neighborhood, using SDSS \emph{ugriz} photometry and \emph{Gaia} astrometry. We generate a mock data sample of WDs from a population model of temperature, surface gravity, and spatial number density distribution, of hydrogen and helium atmospheric types. All sample objects have photometry and parallax information with observational errors expected from SDSS and \emph{Gaia}, and sample construction selection effects are taken into account. We also discuss the possibility of identifying binary WD systems and demonstrate how to do so using photometric and astrometric information alone.
 
@@ -157,7 +157,7 @@ The distribution of effective temperature is parametrized as
 \begin{equation}\label{eq:T}
     \pr(\Teff | \popp) \propto \Theta(\Teff - \Teff_\text{min})\, \Theta(\Teff_\text{max} - \Teff) \, \exp (-\alpha \Teff),
 \end{equation}
-where $\Theta$ is the Heaviside step function, and $\Teff_\text{min}=5000$~K and $\Teff_\text{max}=120$,000~K the lower and upper bounds on the effective temperature. \changes{The upper and lower bounds to the effective temperature are not seen due to selection effects, as we shall see in Sec.~\ref{sec:sample_cuts}.}
+where $\Theta$ is the Heaviside step function, and $\Teff_\text{min}=5000$~K and $\Teff_\text{max}=120$,000~K the lower and upper bounds on the effective temperature. \changes{The upper and lower bounds to the effective temperature are not seen due to selection effects, as we shall see in Sec.~\ref{sec:sample_cuts}. Thus our model is not sensitive to the exact values of these bounds.}
 
 The distribution of surface gravity is parametrized by \changes{a sum of two Gaussians, according to}
 \begin{equation}\label{eq:T&g}
@@ -238,11 +238,12 @@ The azimuthal angle can be neglected, as the Galaxy is assumed to be axisymmetri
 
 The data for a given WD are apparent magnitude measurements in photometric bands ($\hat{m}_b$), a parallax measurement ($\hat{\varpi}$), angular position ($l$ and $b$), including the error models of these observables.\footnote{A hatted quantity (e.g. $\hat{\varpi}$) refers to an observed value, while a non-hatted quantity (e.g. $\varpi$) refers to an observable's true value. The angles $l$ and $b$ are written without hats, as their measurement uncertainties are so small that they can be neglected.} The data characterising a WD with index $i$, called $\data_i$, is listed in Table \ref{tab:parameters}.
 
-\changes{The likelihood of the different photometric bands is calculated in flux instead of magnitudes, which is important for objects with a low signal-to-noise where a first order error propagation from flux to magnitude is inaccurate.} The likelihood associated with a WD is
+\changes{The contribution to the likelihood from the data in the each photometric band 
+is calculated in flux instead of magnitudes, which is important for objects with a low signal-to-noise where a first order error propagation from flux to magnitude is inaccurate.} The likelihood associated with a WD is
 \begin{equation}\label{eq:likelihood}
 	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{b} \mathcal{N}(F_b(\objp_i)|\hat{F}_b,\sigma_{F,b}),
 \end{equation}
-where $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$, \changes{$F_b(\objp_i)$ is the true flux as given by the object parameters, and $\hat{F}_b$ is the observed flux with uncertainty $\sigma_{F,b}$. The conversions between fluxes and magnitudes is performed according to Appendix 2A in \cite{2012MNRAS.419..390M}.} The factor containing parallax information is dropped when no parallax information is present.
+where $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$, \changes{$F_b(\objp_i)$ is the true flux as given by the object parameters, and $\hat{F}_b$ is the observed flux with uncertainty $\sigma_{F,b}$. The conversions between fluxes and magnitudes are as given in Appendix 2A in \cite{2012MNRAS.419..390M}.} The factor containing parallax information is dropped when no parallax information is present.
 
 In this work, we use SDSS photometry in \emph{ugriz} colour bands, and a Bergeron atmospheric stellar model, as discussed in Sec. \ref{sec:model}. In order to assign realistic uncertainties to the mock data that we generate, we use median uncertainties of the SDSS DR9 catalogue, in bins of observed apparent magnitude of width 0.5 mag. These median uncertainties are shown in Fig.~\ref{fig:magnitude_error}. We limit the minimum \emph{ugriz} magnitude uncertainty to 0.01 mag, in order to account for possible systematic uncertainties in the Bergeron atmospheric model.
 
@@ -384,7 +385,7 @@ where
 \begin{equation}
 	\hat{\delta}_{ugr} \equiv -0.4925\hat{m}_u-0.5075\hat{m}_g+\hat{m}_r.
 \end{equation}
-Without measurement errors, this cut corresponds to limiting the temperature of a DA type WD to $\Teff \in (7000,30000)$ K; for a helium dominated WD the upper limit in temperature is less restrictive, as can be seen in Fig.~\ref{fig:colors_cut}.
+Without measurement errors, this cut corresponds to limiting the temperature of a hydrogen dominated WD to $\Teff \in (7000,30000)$ K; for a helium dominated WD the upper limit in temperature is less restrictive, as can be seen in Fig.~\ref{fig:colors_cut}.
 
 \begin{figure}
 	\includegraphics[width=\columnwidth]{colors_cut.pdf}
@@ -411,14 +412,14 @@ where $m_G$ and $\delta_{ugr}$ are true observables with an implicit dependence 
 \end{equation}
 assuming that the different magnitude errors are uncorrelated.
 
-\changes{The selection function acts on magnitudes instead of fluxes, unlike the likelihood of Eq.~\eqref{eq:likelihood}. For the photometric bands that are relevant for selection ($u,g,r$), the uncertainties are sufficiently small such that cuts in flux and magnitude give practically identical results. Furthermore, the normalisation $\bar{N}$ (see Eq.~\eqref{eq:normalization}) is significantly more expensive to compute in flux space.}
+\changes{The selection function acts on magnitudes instead of fluxes, unlike the likelihood of Eq.~\eqref{eq:likelihood}. For the photometric bands that are relevant for selection ($u,g,r$), the uncertainties are sufficiently small such that cuts in flux and magnitude give practically identical results. Furthermore, the normalisation $\bar{N}$, see Eq.~\eqref{eq:normalization}, is significantly more expensive to compute in flux space.}
 
 
 \subsection{Generating a mock sample}
 
 The mock sample of WDs is generated by rejection sampling. An object is drawn randomly from the true population model: the object parameters $\Teff$, $\logg$ and $t$ are distributed as described in Eq.~\eqref{eq:T&g} and Eq.~\eqref{eq:DADB} and can be randomized analytically; the position is distributed according to $n(\mathbf{x})$ and is randomized by rejection sampling, knowing that there is a maximal distance a WD can have in order to be included in our sample (observational errors included). A randomly drawn object is then assigned observable quantities, with errors as described in Sec.~\ref{sec:data}. If the object observables fulfil the selection cuts, the object is included in the sample; if not, it is rejected.
 
-We construct a sample with $10^4$ WDs. The distribution of true object parameter values is shown in Fig. \ref{fig:10000WDs}, where selection effects are manifest. The maximum distance is clearly seen as a function of temperature, where hotter objects are seen further away. Due to the colour cut, the high temperature tail is more pronounced for the helium dominated sub-population. It is also clear that low mass WDs are more likely to be included as they are more luminous and seen to further distances, \changes{an effect that is quenching the second surface gravity mode at $g=8.4$.}
+We construct a sample with $10^4$ WDs. The distribution of true object parameter values is shown in Fig. \ref{fig:10000WDs}, where selection effects are manifest. The maximum distance is clearly seen as a function of temperature, where hotter objects are seen further away. Due to the colour cut, the high temperature tail is more pronounced for the helium dominated sub-population. It is also clear that low mass WDs are more likely to be included as they are more luminous and seen to greater distances, \changes{an effect that quenches the second surface gravity mode at $g=8.4$.}
 \begin{figure*}
 	\includegraphics[width=.9\textwidth]{sample_corner.pdf}
     \caption{The distributions of true intrinsic properties of our mock data sample, represented as 1D and 2D histograms. The axis are shared between the panels, except for the vertical axis of the 1D histograms. Hydrogen and helium dominated WDs are plotted separately in the 1D histograms, but not in the 2D histograms.}
@@ -426,8 +427,7 @@ We construct a sample with $10^4$ WDs. The distribution of true object parameter
 \end{figure*}
 
 
-
-\subsection{Results}\label{sec:results}
+\subsection{Sampling}
 
 We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm, \changes{
 where the population parameters are sampled using a standard Metropolis-Hastings MCMC \citep{BayesianDataAnalysis}, but the Bayesian evidence (or marginal likelihood) of each respective WD is calculated by importance sampling. The Bayesian evidence of an object $i$ is proportional to the integral over the object parameters,
@@ -436,12 +436,19 @@ where the population parameters are sampled using a standard Metropolis-Hastings
 \end{equation}
 This integral is expensive to compute, which is why it is calculated by importance sampling, which works in the following way. For each separate WD, a thinned MCMC gives a number of independently drawn points from the function in Eq.~\eqref{eq:evidence}, given some background population model set by fixed population parameters. The Bayesian evidence under this background model can be computed by taking the sum of the posterior values of that chain, weighted by the volume that each point occupies; this volume weight is proportional to the nearest-neighbour distance cubed, as described in \cite{2017arXiv170403472H}. The Bayesian evidence for a WD under a different set of population parameters $\popp$ is calculated in the same way, although the weight of each point also includes the ratio
 \begin{equation}\label{eq:weight}
-	\frac{\pr(\objp_i | \popp)}{\pr(\objp_i | \popp_\text{b.g.})},
+	\frac{\pr(\objp_i | \popp)}{\pr(\objp_i | \popp_\text{bg})},
 \end{equation}
-where $\popp_\text{b.g.}$ is the population parameters of the background model. This is significantly cheaper computationally, as the likelihood of the data ($\pr(\data_i|\objp_i)$) does not need to be computed with every new step of the population parameter MCMC. The Bayesian evidence of the two WD types, hydrogen and helium dominated, are computed separately and then added together, for each respective WD.
+where $\popp_\text{bg}$ is the population parameters of the background model. This is significantly cheaper computationally, as the likelihood of the data ($\pr(\data_i|\objp_i)$) does not need to be computed with every new step of the population parameter MCMC. The Bayesian evidence of the two WD types, hydrogen and helium dominated, are computed separately and then added together, for each respective WD.
 }
 
 The population parameter prior, $\pr(\popp)$, is taken to be uniform and wide in all parameters around the true parameter values.
+
+
+
+
+
+
+\subsection{Results}\label{sec:results}
 
 The inferred posterior distributions are shown in Fig. \ref{fig:chain} and \ref{fig:chain_parallax}, where the former has no parallax information. In each of these chains, the Metropolis-within-Gibbs MCMC has run for $10^4$ iterations.
 
@@ -457,7 +464,7 @@ The inferred posterior distributions are shown in Fig. \ref{fig:chain} and \ref{
     \label{fig:chain_parallax}
 \end{figure*}
 
-In both cases, with and without parallax information, the correct population parameter values are recovered by the posterior distribution. \changes{The results for $\alpha$ is somewhat low, which is a property of this particular mock data sample, found not be shared with other mock data samples (generated in the same manner).} The inference on quantities $\alpha$ (parametrizing the distribution of effective temperature) and $f_\text{He}$ (the fraction of helium dominated WDs) is not significantly affected by also adding parallax information. For the remaining parameters, parametrizing the distribution of surface gravity, the inference is strongly affected when including parallax information.
+In both cases, with and without parallax information, the correct population parameter values are recovered by the posterior distribution. \changes{When inferring the population parameters of other mock data samples (generated in the same manner), no significant biases were found.} The inference on quantities $\alpha$ (parametrizing the distribution of effective temperature) and $f_\text{He}$ (the fraction of helium dominated WDs) is not significantly affected by also adding parallax information. For the remaining parameters, parametrizing the distribution of surface gravity, the inference is strongly affected when including parallax information.
 
 
 
