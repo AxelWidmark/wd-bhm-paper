@@ -164,7 +164,7 @@ The distribution of surface gravity is parametrized by \changes{a sum of two Gau
     \pr(\logg | \popp) \propto \beta \mathcal{N}(\logg | \bar{g}_1, \sigma_{g,1}) +
     (1-\beta) \mathcal{N}(\logg | \bar{g}_2, \sigma_{g,2}),
 \end{equation}
-\changes{where $\beta$ is the relative weight of the Gaussians, $\bar{g}_{\{1,2\}}$ are the Gaussian means, and $\sigma_{g,\{1,2\}}$ are the Gaussian widths. This can account for possible multi-modality in the surface gravity distribution (although in this case only two separate modes).}
+\changes{where $\beta$ correspond to the relative weights of the Gaussians, $\bar{g}_{\{1,2\}}$ are the means, and $\sigma_{g,\{1,2\}}$ are the widths. This can account for possible multi-modality in the surface gravity distribution (although in this case only two separate modes).}
 
 The type of the object constitutes a third parameter of the intrinsic WD properties, called $t$. This is a label, denoting for example if the WD is of hydrogen or helium atmospheric classification. The probabilities are written in terms of the fraction of helium WDs, as
 \begin{equation}\label{eq:DADB}
@@ -291,7 +291,7 @@ where $\pr(\popp)$ is a prior on the population parameters; $S(\data_i)$ is the 
     \edge {popp} {objp} ; %
     \edge {objp}{data}  ; %
   }
-  \caption{A directed acyclical graph (DAG) of our statistical model. Quantities inscribed in circles (squares) represent variables (constants); solid (dotted) arrows represent probabilistic (deterministic) dependence; a rectangle with rounded corners represents a set of objects, in this case the set of WD included in our sample, carrying an index $i$; $\popp$ is the set of population parameters, $S$ is the selection function of our sample construction, $\bar{N}$ is the normalization to the WD distribution function, $\objp$ is the set of object parameters, $\boldsymbol{d}$ is the object data, and $i$ is the object index.}
+  \caption{A directed acyclical graph (DAG) of our statistical model. Quantities inscribed in circles (squares) represent parameters (constants); solid (dotted) arrows represent probabilistic (deterministic) dependence; a rectangle with rounded corners represents a set of objects, in this case the set of WD included in our sample, carrying an index $i$; $\popp$ is the set of population parameters, $S$ is the selection function of our sample construction, $\bar{N}$ is the normalization to the WD distribution function, $\objp$ is the set of object parameters, $\boldsymbol{d}$ is the object data, and $i$ is the object index.}
 \label{fig:DAG}
 \end{figure}
 
@@ -429,8 +429,7 @@ We construct a sample with $10^4$ WDs. The distribution of true object parameter
 
 \subsection{Sampling}
 
-We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Monte-Carlo Markov Chain (MCMC) to trace the posterior distribution. We use a special purpose sampling algorithm, \changes{
-where the population parameters are sampled using a standard Metropolis-Hastings MCMC \citep{BayesianDataAnalysis}, but the Bayesian evidence (or marginal likelihood) of each respective WD is calculated by importance sampling. The Bayesian evidence of an object $i$ is proportional to the integral over the object parameters,
+We infer the population parameters of a Bayesian hierarchical model, as described in Sec.~\ref{sec:model}, for our mock data sample, using a Markov chain Monte-Carlo (MCMC) to trace the posterior distribution. \changes{Computing the posterior value for a set of population parameters, with all object parameters marginalised, can be very expensive computationally due to the high number of objects. In order to be more computationally efficient, we use a special purpose sampling algorithm, where the population parameters are sampled using a standard Metropolis-Hastings MCMC \citep{BayesianDataAnalysis}, but the Bayesian evidence (or marginal likelihood) of each respective WD is calculated by importance sampling. The Bayesian evidence of an object $i$ is proportional to the integral over the object parameters,
 \begin{equation}\label{eq:evidence}
 	\int \pr(\data_i|\objp_i) \pr(\objp_i | \popp).
 \end{equation}
@@ -438,8 +437,11 @@ This integral is expensive to compute, which is why it is calculated by importan
 \begin{equation}\label{eq:weight}
 	\frac{\pr(\objp_i | \popp)}{\pr(\objp_i | \popp_\text{bg})},
 \end{equation}
-where $\popp_\text{bg}$ is the population parameters of the background model. This is significantly cheaper computationally, as the likelihood of the data ($\pr(\data_i|\objp_i)$) does not need to be computed with every new step of the population parameter MCMC. The Bayesian evidence of the two WD types, hydrogen and helium dominated, are computed separately and then added together, for each respective WD.
-}
+where $\popp_\text{bg}$ is the population parameters of the background model. This is significantly cheaper computationally, as the likelihood of the data ($\pr(\data_i|\objp_i)$) does not need to be computed with every new step of the population parameter MCMC. The Bayesian evidence of the two WD types, hydrogen and helium dominated, are computed separately and then added together, for each respective WD.}
+
+ \changes{
+The background model has the following population parameter values: $\alpha = 3.5$, $\beta = 1$, $\bar{g}_1 = 8.2$, $\sigma_{g,1} = 0.3$, $f_\text{He} = 0.5$, thus with a surface gravity distribution consisting of only one Gaussian. It is important that the the background model surface gravity distribution is similar to but wider than the inferred distribution, as it can otherwise impose artificial constraints or biases to the posterior density.}
+
 
 The population parameter prior, $\pr(\popp)$, is taken to be uniform and wide in all parameters around the true parameter values.
 
