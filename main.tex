@@ -239,8 +239,9 @@ The data for a given WD are apparent magnitude measurements in photometric bands
 
 The contribution to the likelihood from the data in the each photometric band 
 is calculated in flux instead of magnitudes, which is important for objects with a low signal-to-noise where a first order error propagation from flux to magnitude is inaccurate. The likelihood associated with a WD is
-\begin{equation}\label{eq:likelihood}
-	\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{b} \mathcal{N}(F_b(\objp_i)|\hat{F}_b,\sigma_{F,b}),
+\begin{equation}
+\label{eq:likelihood}
+\pr(\data_i | \objp_i) = \mathcal{N}(\varpi(\objp_i)|\hat{\varpi},\sigma_{\hat{\varpi}})\prod_{b} \mathcal{N}(F_b(\objp_i)|\hat{F}_b,\sigma_{F,b}),
 \end{equation}
 where $\mathcal{N}(x | \mu,\sigma)$ is the normal distribution of mean $\mu$ and standard deviation $\sigma$, $F_b(\objp_i)$ is the true flux as given by the object parameters, and $\hat{F}_b$ is the observed flux with uncertainty $\sigma_{F,b}$. The conversions between fluxes and magnitudes are as given in Appendix 2A in \cite{2012MNRAS.419..390M}. The factor containing parallax information is dropped when no parallax information is present.
 
